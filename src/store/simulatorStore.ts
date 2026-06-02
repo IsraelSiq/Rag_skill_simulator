@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import type { JobId, AllocatedSkills } from '@/types'
-import { getJobChain } from '@/data/jobs'
-import { findSkill, SKILLS_BY_JOB } from '@/data/skills'
+import { getJobChain, JOBS } from '@/data/jobs'
+import { findSkill } from '@/data/skills'
 
 interface SimulatorState {
   selectedJob: JobId | null
@@ -16,11 +16,8 @@ interface SimulatorState {
 }
 
 function calcTotalPoints(chain: JobId[]): number {
-  // simplificado: soma skillPoints de cada job na chain
-  // na prática seria baseado no job level do personagem
-  const { JOBS } = require('@/data/jobs') as typeof import('@/data/jobs')
   return chain.reduce((acc, id) => {
-    const job = JOBS.find((j: any) => j.id === id)
+    const job = JOBS.find((j) => j.id === id)
     return acc + (job?.skillPoints ?? 0)
   }, 0)
 }
@@ -29,7 +26,6 @@ function calcUsed(allocated: AllocatedSkills): number {
   return Object.values(allocated).reduce((a, b) => a + b, 0)
 }
 
-// Ao alocar uma skill, auto-aloca as dependências necessárias
 function autoAllocateDeps(
   skillId: string,
   targetLevel: number,
@@ -40,12 +36,10 @@ function autoAllocateDeps(
 
   let result = { ...allocated }
 
-  // Processa dependências recursivamente
   if (skill.requires) {
     for (const req of skill.requires) {
       const currentLevel = result[req.skillId] ?? 0
       if (currentLevel < req.level) {
-        // Auto-aloca a dependência
         result = autoAllocateDeps(req.skillId, req.level, result)
         result[req.skillId] = Math.max(currentLevel, req.level)
       }
@@ -65,27 +59,16 @@ export const useSimulatorStore = create<SimulatorState>((set, get) => ({
 
   selectJob: (jobId) => {
     const chain = getJobChain(jobId)
-    const totalPoints = chain.reduce((acc, id) => {
-      const job = Object.values(SKILLS_BY_JOB)
-      // importação lazy para evitar circular
-      return acc
-    }, 0)
-
-    // Calcula total de pontos disponíveis para a chain
-    import('@/data/jobs').then(({ JOBS }) => {
-      const total = chain.reduce((acc, id) => {
-        const job = JOBS.find(j => j.id === id)
-        return acc + (job?.skillPoints ?? 0)
-      }, 0)
-      set({ selectedJob: jobId, jobChain: chain, allocated: {}, usedPoints: 0, totalPoints: total })
-    })
+    const total = calcTotalPoints(chain)
+    set({ selectedJob: jobId, jobChain: chain, allocated: {}, usedPoints: 0, totalPoints: total })
   },
 
   setSkillLevel: (skillId, level) => {
     const { allocated } = get()
-    const newAllocated = level === 0
-      ? (() => { const a = { ...allocated }; delete a[skillId]; return a })()
-      : autoAllocateDeps(skillId, level, allocated)
+    const newAllocated =
+      level === 0
+        ? (() => { const a = { ...allocated }; delete a[skillId]; return a })()
+        : autoAllocateDeps(skillId, level, allocated)
 
     set({ allocated: newAllocated, usedPoints: calcUsed(newAllocated) })
   },
