@@ -1,0 +1,71 @@
+import type { Skill } from '@/types'
+
+export const SWORDMAN_SKILLS: Skill[] = [
+  {
+    id: 'sm_bash',
+    name: 'Bash',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Golpe físico poderoso com bônus de dano. Nível 5+ adiciona Stun.',
+  },
+  {
+    id: 'sm_provoke',
+    name: 'Provoke',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Aumenta ATK e DEF do alvo. Funciona em monstros e players.',
+  },
+  {
+    id: 'sm_magnum',
+    name: 'Magnum Break',
+    maxLevel: 10,
+    type: 'active',
+    description: 'AoE de fogo ao redor do personagem. Aumenta ATK de fogo por 10s.',
+    requires: [{ skillId: 'sm_bash', level: 5 }],
+  },
+  {
+    id: 'sm_increase_hp',
+    name: 'Increase HP Recovery',
+    maxLevel: 10,
+    type: 'passive',
+    description: 'Aumenta a regeneração natural de HP.',
+  },
+  {
+    id: 'sm_endure',
+    name: 'Endure',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Imunidade a knockback e redução de MDEF por curta duração.',
+    requires: [{ skillId: 'sm_provoke', level: 5 }],
+  },
+  {
+    id: 'sm_hp_recovery_while_moving',
+    name: 'HP Recovery While Moving',
+    maxLevel: 10,
+    type: 'passive',
+    description: 'Permite regenerar HP mesmo em movimento.',
+    requires: [{ skillId: 'sm_increase_hp', level: 5 }],
+  },
+  {
+    id: 'sm_sword_mastery',
+    name: 'Sword Mastery',
+    maxLevel: 10,
+    type: 'passive',
+    description: '+4 ATK por nível com espadas.',
+  },
+  {
+    id: 'sm_two_hand_mastery',
+    name: 'Two-Handed Sword Mastery',
+    maxLevel: 10,
+    type: 'passive',
+    description: '+4 ATK por nível com espadas de duas mãos.',
+  },
+  {
+    id: 'sm_auto_berserk',
+    name: 'Auto Berserk',
+    maxLevel: 1,
+    type: 'toggle',
+    description: 'Ativa Provoke automaticamente ao ficar com menos de 25% HP.',
+    requires: [{ skillId: 'sm_provoke', level: 1 }],
+  },
+]
