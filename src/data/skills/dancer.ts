@@ -1,0 +1,71 @@
+import type { Skill } from '@/types'
+
+export const DANCER_SKILLS: Skill[] = [
+  {
+    id: 'dc_throwarrow',
+    name: 'Throw Arrow',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Ataque à distância com flechas. Bônus de dano escalável.',
+  },
+  {
+    id: 'dc_scream',
+    name: 'Scream',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Grito que causa Frenzy no alvo (aumenta ATK mas causa confusão).',
+    requires: [{ skillId: 'dc_throwarrow', level: 3 }],
+  },
+  {
+    id: 'dc_winkcharm',
+    name: 'Wink of Charm',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Encanta monstro humanoide para seguir a Dancer.',
+  },
+  {
+    id: 'dc_dontforgetme',
+    name: "Don't Forget Me",
+    maxLevel: 10,
+    type: 'active',
+    description: 'Dança que reduz ASPD e velocidade de inimigos na área.',
+    requires: [{ skillId: 'dc_winkcharm', level: 3 }],
+  },
+  {
+    id: 'dc_fortunekiss',
+    name: 'Fortune Kiss',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Dança que aumenta CRIT e LUCK de aliados na área.',
+    requires: [{ skillId: 'dc_winkcharm', level: 3 }],
+  },
+  {
+    id: 'dc_serviceforyou',
+    name: 'Service for You',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Dança que aumenta SP máximo e reduz consumo de SP de aliados.',
+    requires: [{ skillId: 'dc_fortunekiss', level: 3 }],
+  },
+  {
+    id: 'dc_humming',
+    name: 'Humming',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Dança que aumenta HIT de aliados na área.',
+  },
+  {
+    id: 'dc_encore',
+    name: 'Encore',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Repete a última dança usada com metade do custo de SP.',
+  },
+  {
+    id: 'dc_dance_lessons',
+    name: 'Dance Lessons',
+    maxLevel: 10,
+    type: 'passive',
+    description: 'Aumenta ATK com instrumentos e potência de todas as danças.',
+  },
+]

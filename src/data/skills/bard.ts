@@ -1,0 +1,72 @@
+import type { Skill } from '@/types'
+
+export const BARD_SKILLS: Skill[] = [
+  {
+    id: 'ba_musicalstrike',
+    name: 'Musical Strike',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Ataque à distância com instrumento. Pode causar Stun.',
+  },
+  {
+    id: 'ba_dissonance',
+    name: 'Dissonance',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Área de dano contínuo pelo som. Causa dano a aliados e inimigos.',
+    requires: [{ skillId: 'ba_musicalstrike', level: 3 }],
+  },
+  {
+    id: 'ba_whistle',
+    name: 'Whistle',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Música que aumenta Flee e ASPD de aliados na área.',
+  },
+  {
+    id: 'ba_assassincross',
+    name: 'Assassin Cross of Sunset',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Música que aumenta ASPD de todos na área.',
+    requires: [{ skillId: 'ba_whistle', level: 5 }],
+  },
+  {
+    id: 'ba_poembragi',
+    name: 'Poem of Bragi',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Música que reduz tempo de cast e delay de aliados. Essencial em PvM.',
+    requires: [{ skillId: 'ba_whistle', level: 3 }],
+  },
+  {
+    id: 'ba_apple',
+    name: 'Apple of Idun',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Música que aumenta HP máximo e regeneração de HP de aliados.',
+    requires: [{ skillId: 'ba_poembragi', level: 3 }],
+  },
+  {
+    id: 'ba_encore',
+    name: 'Encore',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Repete a última música usada com metade do custo de SP.',
+  },
+  {
+    id: 'ba_guitar_mastery',
+    name: 'Music Lessons',
+    maxLevel: 10,
+    type: 'passive',
+    description: 'Aumenta ATK com instrumentos e potência de todas as músicas.',
+  },
+  {
+    id: 'ba_pangvoice',
+    name: 'Pang Voice',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Causa Confusion no alvo.',
+    requires: [{ skillId: 'ba_musicalstrike', level: 5 }],
+  },
+]
