@@ -1,8 +1,11 @@
 import type { JobId, Skill } from '@/types'
+import { NOVICE_SKILLS } from './novice'
 import { SWORDMAN_SKILLS } from './swordman'
 import { MAGE_SKILLS } from './mage'
 import { ARCHER_SKILLS } from './archer'
+import { MERCHANT_SKILLS } from './merchant'
 import { THIEF_SKILLS } from './thief'
+import { ACOLYTE_SKILLS } from './acolyte'
 import { KNIGHT_SKILLS } from './knight'
 import { WIZARD_SKILLS } from './wizard'
 import { HUNTER_SKILLS } from './hunter'
@@ -11,19 +14,24 @@ import { PRIEST_SKILLS } from './priest'
 
 // Mapa de skills por jobId
 export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
+  // 1ª classe
+  novice:    NOVICE_SKILLS,
   swordman:  SWORDMAN_SKILLS,
   mage:      MAGE_SKILLS,
   archer:    ARCHER_SKILLS,
+  merchant:  MERCHANT_SKILLS,
   thief:     THIEF_SKILLS,
+  acolyte:   ACOLYTE_SKILLS,
+  // 2ª classe
   knight:    KNIGHT_SKILLS,
   wizard:    WIZARD_SKILLS,
   hunter:    HUNTER_SKILLS,
   assassin:  ASSASSIN_SKILLS,
   priest:    PRIEST_SKILLS,
-  // TODO: adicionar demais jobs (monk, crusader, rogue, bard, dancer, blacksmith, alchemist)
+  // TODO: crusader, rogue, bard, dancer, blacksmith, alchemist, monk, sage
   // TODO: Trans classes (lord-knight, high-wizard, sniper, assassin-cross, high-priest, etc.)
   // TODO: 3rd classes (rune-knight, warlock, ranger, etc.)
-  // TODO: 4th classes (dragon-knight, arch-mage, etc.) com skills TrueMmo
+  // TODO: 4th classes (dragon-knight, arch-mage, etc.)
 }
 
 // Retorna todas as skills disponíveis para uma chain de jobs
