@@ -30,18 +30,21 @@ import { WHITESMITH_SKILLS } from './whitesmith'
 import { CREATOR_SKILLS } from './creator'
 import { ASSASSIN_CROSS_SKILLS } from './assassin-cross'
 import { STALKER_SKILLS } from './stalker'
+import { HIGH_PRIEST_SKILLS } from './high-priest'
 import { MINSTREL_SKILLS } from './minstrel'
 import { WANDERER_SKILLS } from './wanderer'
 import { MECHANIC_SKILLS } from './mechanic'
 import { GENETIC_SKILLS } from './genetic'
 import { GUILLOTINE_CROSS_SKILLS } from './guillotine-cross'
 import { SHADOW_CHASER_SKILLS } from './shadow-chaser'
+import { ARCHBISHOP_SKILLS } from './archbishop'
 import { TROUBADOUR_SKILLS } from './troubadour'
 import { TROUVERE_SKILLS } from './trouvere'
 import { MEISTER_SKILLS } from './meister'
 import { BIOLO_SKILLS } from './biolo'
 import { NIGHT_WATCH_SKILLS } from './night-watch'
 import { ABYSS_CHASER_SKILLS } from './abyss-chaser'
+import { CARDINAL_SKILLS } from './cardinal'
 
 export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   // 1ª classe
@@ -78,7 +81,8 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'creator':        CREATOR_SKILLS,
   'assassin-cross': ASSASSIN_CROSS_SKILLS,
   'stalker':        STALKER_SKILLS,
-  // TODO: high-priest, champion
+  'high-priest':    HIGH_PRIEST_SKILLS,
+  // TODO: champion
   // 3rd classes
   'minstrel':         MINSTREL_SKILLS,
   'wanderer':         WANDERER_SKILLS,
@@ -86,7 +90,8 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'genetic':          GENETIC_SKILLS,
   'guillotine-cross': GUILLOTINE_CROSS_SKILLS,
   'shadow-chaser':    SHADOW_CHASER_SKILLS,
-  // TODO: archbishop, sura, rune-knight, royal-guard, warlock, sorcerer, ranger
+  'archbishop':       ARCHBISHOP_SKILLS,
+  // TODO: sura, rune-knight, royal-guard, warlock, sorcerer, ranger
   // 4th classes
   'troubadour':    TROUBADOUR_SKILLS,
   'trouvere':      TROUVERE_SKILLS,
@@ -94,7 +99,8 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'biolo':         BIOLO_SKILLS,
   'night-watch':   NIGHT_WATCH_SKILLS,
   'abyss-chaser':  ABYSS_CHASER_SKILLS,
-  // TODO: cardinal, inquisitor, dragon-knight, imperial-guard,
+  'cardinal':      CARDINAL_SKILLS,
+  // TODO: inquisitor, dragon-knight, imperial-guard,
   //       arch-mage, elemental-master, windhawk
 }
 
