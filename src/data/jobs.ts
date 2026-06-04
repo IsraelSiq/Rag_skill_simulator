@@ -94,7 +94,7 @@ export function getJobChain(jobId: JobId): JobId[] {
 
 export const JOBS_BY_TIER: Record<number, JobMeta[]> = {
   1: JOBS.filter(j => j.tier === 1),
-  2: JOBS.filter(j => j.tier === 2 && j.id !== 'novice'),
+  2: JOBS.filter(j => j.tier === 2),
   3: JOBS.filter(j => j.tier === 3),
   4: JOBS.filter(j => j.tier === 4),
   5: JOBS.filter(j => j.tier === 5),
