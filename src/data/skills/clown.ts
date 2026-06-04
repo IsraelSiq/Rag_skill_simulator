@@ -1,0 +1,85 @@
+import type { Skill } from '@/types'
+
+export const CLOWN_SKILLS: Skill[] = [
+  {
+    id: 'cg_arrowvulcan',
+    name: 'Arrow Vulcan',
+    maxLevel: 9,
+    type: 'active',
+    description: 'Dispara 9 flechas em rápida sequência no alvo. Dano total muito elevado com build DEX.',
+    requires: [{ skillId: 'ba_musicalstrike', level: 5 }],
+  },
+  {
+    id: 'cg_moonlitserenade',
+    name: 'Moonlit Water Mill',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Duo com Gypsy. Cria área de silêncio e dano mágico ao redor. Inimigos que entram sofrem dano e podem ser silenciados.',
+  },
+  {
+    id: 'cg_longing',
+    name: 'Longing for Freedom',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Permite movimento dentro de uma performance ativa por curta duração. Reduz a efetividade da música ao se mover.',
+    requires: [{ skillId: 'ba_encore', level: 1 }],
+  },
+  {
+    id: 'cg_tarotcard',
+    name: 'Tarot Card of Fate',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Sorteia uma carta de tarô aleatória com efeito no alvo: pode causar dano, status negativos (Stun, Silence, Curse, Blind), ou destruir equipamentos.',
+    requires: [{ skillId: 'ba_dissonance', level: 3 }],
+  },
+  {
+    id: 'cg_marionette',
+    name: 'Marionette Control',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Transfere metade dos atributos base (STR, AGI, INT, DEX, VIT, LUK) do Clown para um aliado alvo por duração limitada.',
+    requires: [
+      { skillId: 'ba_poembragi', level: 5 },
+      { skillId: 'ba_apple', level: 5 },
+    ],
+  },
+  {
+    id: 'cg_hermode',
+    name: 'Song of Mana',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Duo com Gypsy. Regenera SP de todos os aliados na área periodicamente.',
+  },
+  {
+    id: 'cg_ringnibelungen',
+    name: 'Ring of Nibelungen',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Duo com Gypsy. Aumenta ATK e nível de refinamento efetivo das armas de aliados na área.',
+  },
+  {
+    id: 'cg_lullaby',
+    name: 'Lullaby',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Duo com Gypsy. Adormece todos os inimigos na área aleatoriamente.',
+  },
+  {
+    id: 'cg_perfect_tablature',
+    name: 'Perfect Tablature',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Duo com Gypsy. Aumenta Flee e reduz chance de ser acertado por crítico de todos os aliados na área.',
+  },
+  {
+    id: 'cg_saturdaynightfever',
+    name: 'Saturday Night Fever',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Duo com Gypsy. Força todos na área (aliados e inimigos) a lutarem entre si de forma descontrolada. Extremamente perigoso.',
+    requires: [
+      { skillId: 'cg_lullaby', level: 1 },
+      { skillId: 'cg_moonlitserenade', level: 3 },
+    ],
+  },
+]
