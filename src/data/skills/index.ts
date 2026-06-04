@@ -49,7 +49,7 @@ import { TROUBADOUR_SKILLS } from './troubadour'
 import { TROUVERE_SKILLS } from './trouvere'
 import { MEISTER_SKILLS } from './meister'
 import { BIOLO_SKILLS } from './biolo'
-import { NIGHT_WATCH_SKILLS } from './night-watch'
+import { SHADOW_CROSS_SKILLS } from './shadow-cross'
 import { ABYSS_CHASER_SKILLS } from './abyss-chaser'
 import { CARDINAL_SKILLS } from './cardinal'
 import { INQUISITOR_SKILLS } from './inquisitor'
@@ -120,7 +120,7 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'trouvere':         TROUVERE_SKILLS,
   'meister':          MEISTER_SKILLS,
   'biolo':            BIOLO_SKILLS,
-  'shadow-cross':     NIGHT_WATCH_SKILLS,
+  'shadow-cross':     SHADOW_CROSS_SKILLS,
   'abyss-chaser':     ABYSS_CHASER_SKILLS,
   'cardinal':         CARDINAL_SKILLS,
   'inquisitor':       INQUISITOR_SKILLS,
