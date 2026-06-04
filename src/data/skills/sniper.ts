@@ -1,0 +1,78 @@
+import type { Skill } from '@/types'
+
+export const SNIPER_SKILLS: Skill[] = [
+  {
+    id: 'sn_sharpshooting',
+    name: 'Sharpshooting',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Flecha de alto dano em linha reta que atravessa múltiplos inimigos. Ignora parte da DEF. Nível 5: 550% ATK.',
+    requires: [{ skillId: 'ht_phantasmic', level: 3 }],
+  },
+  {
+    id: 'sn_falconassault',
+    name: 'Falcon Assault',
+    maxLevel: 5,
+    type: 'active',
+    description: 'O falcão ataca com força total em AoE ao redor do alvo, ignorando DEF. Dano baseado em INT e Steel Crow.',
+    requires: [
+      { skillId: 'ht_blitzbeat', level: 5 },
+      { skillId: 'ht_steelcrow', level: 3 },
+    ],
+  },
+  {
+    id: 'sn_windwalk',
+    name: 'Wind Walk',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Aumenta velocidade de movimento e Flee do caster e aliados próximos por duração escalável.',
+  },
+  {
+    id: 'sn_charge_arrow',
+    name: 'Charge Arrow',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Flecha que empurra o alvo para longe com força. útil para interromper cast ou criar distância.',
+    requires: [{ skillId: 'ac_arrow_repel', level: 1 }],
+  },
+  {
+    id: 'sn_sight_blaster',
+    name: 'Sight Blaster',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Envolve o caster em uma aura que dispara automaticamente quando inimigos se aproximam, causando dano e knockback.',
+    requires: [{ skillId: 'sn_windwalk', level: 3 }],
+  },
+  {
+    id: 'sn_arrowvulcan',
+    name: 'Arrow Vulcan',
+    maxLevel: 9,
+    type: 'active',
+    description: 'Dispara 9 flechas em rápida sequência no alvo. Dano total muito elevado com build DEX.',
+    requires: [{ skillId: 'sn_sharpshooting', level: 3 }],
+  },
+  {
+    id: 'sn_detectinfo',
+    name: 'Detect',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Revela todos os inimigos e armadilhas na área do mapa. Versão avançada do Detecting do Hunter.',
+    requires: [{ skillId: 'ht_detecting', level: 4 }],
+  },
+  {
+    id: 'sn_expertise',
+    name: 'True Sight',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Aumenta ATK, HIT, CRI, DEX e INT do caster. Nível 10: +20 em todos os atributos por 30s.',
+    requires: [{ skillId: 'ht_detecting', level: 1 }],
+  },
+  {
+    id: 'sn_lowhp_shot',
+    name: 'Focused Arrow Strike',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Concentra toda a mira em um único alvo causando dano máximo. Bonuás de dano quando o alvo está com HP baixo.',
+    requires: [{ skillId: 'sn_sharpshooting', level: 5 }],
+  },
+]
