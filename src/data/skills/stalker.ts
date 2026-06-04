@@ -1,0 +1,73 @@
+import type { Skill } from '@/types'
+
+export const STALKER_SKILLS: Skill[] = [
+  {
+    id: 'st_fullstrip',
+    name: 'Full Strip',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Remove simultaneamente arma, escudo, armadura e elmo do alvo. Combina todos os Strips em uma única skill.',
+    requires: [
+      { skillId: 'rg_stripweapon', level: 5 },
+      { skillId: 'rg_stripshield', level: 5 },
+      { skillId: 'rg_striparmor', level: 5 },
+      { skillId: 'rg_striphelm', level: 5 },
+    ],
+  },
+  {
+    id: 'st_preserve',
+    name: 'Preserve',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Protege a skill copiada por Plagiarism de ser sobrescrita por nova cópia acidental.',
+    requires: [{ skillId: 'rg_plagiarism', level: 10 }],
+  },
+  {
+    id: 'st_plagiarism2',
+    name: 'Reproduce',
+    maxLevel: 10,
+    type: 'passive',
+    description: 'Segunda slot de cópia de skill independente do Plagiarism. Permite ter duas skills copiadas simultaneamente.',
+    requires: [{ skillId: 'rg_plagiarism', level: 5 }],
+  },
+  {
+    id: 'st_raid',
+    name: 'Raid EX',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Versão aprimorada do Raid com maior raio, dano e chance de status. Aplica também Sleep.',
+    requires: [{ skillId: 'rg_raid', level: 5 }],
+  },
+  {
+    id: 'st_divest_all',
+    name: 'Divest All',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Remove todos os equipamentos do alvo E reduz seus atributos base por duração. Versão devastadora do Full Strip.',
+    requires: [{ skillId: 'st_fullstrip', level: 3 }],
+  },
+  {
+    id: 'st_shadowform',
+    name: 'Shadow Form',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Absorve o dano recebido pelo alvo aliado, transferindo-o para o Stalker. Funciona como escudo humano voluntário.',
+    requires: [{ skillId: 'rg_intimidate', level: 3 }],
+  },
+  {
+    id: 'st_chasewalk',
+    name: 'Chase Walk',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Move-se invisivelmente em alta velocidade. Ao atacar saindo do Chase Walk aplica efeito bônus baseado no nível.',
+    requires: [{ skillId: 'rg_backstab', level: 5 }],
+  },
+  {
+    id: 'st_strikeout',
+    name: 'Stalk',
+    maxLevel: 3,
+    type: 'active',
+    description: 'Marca o alvo para perseguição. Ataques contra o alvo marcado ignoram modificações de distância e têm maior precisão.',
+    requires: [{ skillId: 'st_chasewalk', level: 3 }],
+  },
+]
