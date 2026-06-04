@@ -1,0 +1,85 @@
+import type { Skill } from '@/types'
+
+export const GYPSY_SKILLS: Skill[] = [
+  {
+    id: 'gy_arrowvulcan',
+    name: 'Arrow Vulcan',
+    maxLevel: 9,
+    type: 'active',
+    description: 'Dispara 9 flechas em rápida sequência no alvo. Dano total muito elevado com build DEX.',
+    requires: [{ skillId: 'dc_throwarrow', level: 5 }],
+  },
+  {
+    id: 'gy_moonlitserenade',
+    name: 'Moonlit Water Mill',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Duo com Clown. Cria área de silêncio e dano mágico ao redor. Inimigos que entram sofrem dano e podem ser silenciados.',
+  },
+  {
+    id: 'gy_longing',
+    name: 'Longing for Freedom',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Permite movimento dentro de uma performance ativa por curta duração. Reduz a efetividade da dança ao se mover.',
+    requires: [{ skillId: 'dc_encore', level: 1 }],
+  },
+  {
+    id: 'gy_tarotcard',
+    name: 'Tarot Card of Fate',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Sorteia uma carta de tarô aleatória com efeito no alvo: pode causar dano, status negativos ou destruir equipamentos.',
+    requires: [{ skillId: 'dc_scream', level: 3 }],
+  },
+  {
+    id: 'gy_marionette',
+    name: 'Marionette Control',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Transfere metade dos atributos base (STR, AGI, INT, DEX, VIT, LUK) da Gypsy para um aliado alvo por duração limitada.',
+    requires: [
+      { skillId: 'dc_serviceforyou', level: 5 },
+      { skillId: 'dc_fortunekiss', level: 5 },
+    ],
+  },
+  {
+    id: 'gy_hermode',
+    name: 'Song of Mana',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Duo com Clown. Regenera SP de todos os aliados na área periodicamente.',
+  },
+  {
+    id: 'gy_ringnibelungen',
+    name: 'Ring of Nibelungen',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Duo com Clown. Aumenta ATK e nível de refinamento efetivo das armas de aliados na área.',
+  },
+  {
+    id: 'gy_lullaby',
+    name: 'Lullaby',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Duo com Clown. Adormece todos os inimigos na área aleatoriamente.',
+  },
+  {
+    id: 'gy_perfect_tablature',
+    name: 'Perfect Tablature',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Duo com Clown. Aumenta Flee e reduz chance de ser acertado por crítico de todos os aliados na área.',
+  },
+  {
+    id: 'gy_saturdaynightfever',
+    name: 'Saturday Night Fever',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Duo com Clown. Força todos na área a lutarem entre si descontroladamente.',
+    requires: [
+      { skillId: 'gy_lullaby', level: 1 },
+      { skillId: 'gy_moonlitserenade', level: 3 },
+    ],
+  },
+]
