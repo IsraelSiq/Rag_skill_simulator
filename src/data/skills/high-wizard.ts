@@ -1,0 +1,80 @@
+import type { Skill } from '@/types'
+
+export const HIGH_WIZARD_SKILLS: Skill[] = [
+  {
+    id: 'hw_magicpower',
+    name: 'Magic Power',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Aumenta MATK em 100% para a próxima skill mágica usada. Nível mais alto aumenta duração do buff.',
+  },
+  {
+    id: 'hw_ganbantein',
+    name: 'Ganbantein',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Remove todas as habilidades de área (Ground Skills) de uma célula: Fire Wall, Storm Gust, Lord of Vermillion, etc.',
+    requires: [
+      { skillId: 'wz_quagmire', level: 3 },
+      { skillId: 'wz_earthspike', level: 3 },
+    ],
+  },
+  {
+    id: 'hw_napalmvulcan',
+    name: 'Napalm Vulcan',
+    maxLevel: 5,
+    type: 'active',
+    element: 'Fantasma',
+    description: 'Dispara múltiplos projéteis de Napalm no alvo. Cada projétil causa dano de elemento Fantasma.',
+    requires: [{ skillId: 'mg_napalmbeat', level: 7 }],
+  },
+  {
+    id: 'hw_gravitation',
+    name: 'Gravitation Field',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Cria campo gravitacional AoE que causa dano mágico periódico e reduz ASPD dos inimigos.',
+    requires: [
+      { skillId: 'wz_meteor_storm', level: 3 },
+      { skillId: 'wz_lord_of_vermillion', level: 3 },
+      { skillId: 'wz_stormgust', level: 3 },
+    ],
+  },
+  {
+    id: 'hw_meltdown',
+    name: 'Meltdown',
+    maxLevel: 5,
+    type: 'active',
+    element: 'Fogo',
+    description: 'Derrete a arma e armadura do alvo com chamas, reduzindo gradualmente a defesa do equipamento.',
+    requires: [{ skillId: 'wz_firebolt', level: 7 }],
+  },
+  {
+    id: 'hw_souldrain',
+    name: 'Soul Drain',
+    maxLevel: 10,
+    type: 'passive',
+    description: 'Recupera SP ao matar inimigos com magias. SP recuperado escala com o nível do monstro e nível da skill.',
+  },
+  {
+    id: 'hw_kaahi',
+    name: 'Kaahi',
+    maxLevel: 7,
+    type: 'active',
+    description: 'Ao receber dano físico, gasta SP para recuperar HP automaticamente. Nível mais alto = mais HP curado por SP gasto.',
+  },
+  {
+    id: 'hw_kaizel',
+    name: 'Kaizel',
+    maxLevel: 6,
+    type: 'active',
+    description: 'Ressuscita automaticamente ao morrer com % de HP. Nível mais alto = mais HP ao ressuscitar.',
+  },
+  {
+    id: 'hw_kaupe',
+    name: 'Kaupe',
+    maxLevel: 3,
+    type: 'active',
+    description: 'Concede chance de esquivar completamente de ataques físicos por 3 cargas. Nível 3: 60% de chance.',
+  },
+]
