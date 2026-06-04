@@ -28,14 +28,17 @@ import { CLOWN_SKILLS } from './clown'
 import { GYPSY_SKILLS } from './gypsy'
 import { WHITESMITH_SKILLS } from './whitesmith'
 import { CREATOR_SKILLS } from './creator'
+import { ASSASSIN_CROSS_SKILLS } from './assassin-cross'
 import { MINSTREL_SKILLS } from './minstrel'
 import { WANDERER_SKILLS } from './wanderer'
 import { MECHANIC_SKILLS } from './mechanic'
 import { GENETIC_SKILLS } from './genetic'
+import { GUILLOTINE_CROSS_SKILLS } from './guillotine-cross'
 import { TROUBADOUR_SKILLS } from './troubadour'
 import { TROUVERE_SKILLS } from './trouvere'
 import { MEISTER_SKILLS } from './meister'
 import { BIOLO_SKILLS } from './biolo'
+import { NIGHT_WATCH_SKILLS } from './night-watch'
 
 export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   // 1ª classe
@@ -61,29 +64,31 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   priest:     PRIEST_SKILLS,
   monk:       MONK_SKILLS,
   // Trans
-  'lord-knight':  LORD_KNIGHT_SKILLS,
-  'paladin':      PALADIN_SKILLS,
-  'high-wizard':  HIGH_WIZARD_SKILLS,
-  'professor':    PROFESSOR_SKILLS,
-  'sniper':       SNIPER_SKILLS,
-  'clown':        CLOWN_SKILLS,
-  'gypsy':        GYPSY_SKILLS,
-  'whitesmith':   WHITESMITH_SKILLS,
-  'creator':      CREATOR_SKILLS,
-  // TODO: assassin-cross, stalker, high-priest, champion
+  'lord-knight':    LORD_KNIGHT_SKILLS,
+  'paladin':        PALADIN_SKILLS,
+  'high-wizard':    HIGH_WIZARD_SKILLS,
+  'professor':      PROFESSOR_SKILLS,
+  'sniper':         SNIPER_SKILLS,
+  'clown':          CLOWN_SKILLS,
+  'gypsy':          GYPSY_SKILLS,
+  'whitesmith':     WHITESMITH_SKILLS,
+  'creator':        CREATOR_SKILLS,
+  'assassin-cross': ASSASSIN_CROSS_SKILLS,
+  // TODO: stalker, high-priest, champion
   // 3rd classes
-  'minstrel':     MINSTREL_SKILLS,
-  'wanderer':     WANDERER_SKILLS,
-  'mechanic':     MECHANIC_SKILLS,
-  'genetic':      GENETIC_SKILLS,
-  // TODO: guillotine-cross, shadow-chaser, archbishop, sura
-  //       rune-knight, royal-guard, warlock, sorcerer, ranger
+  'minstrel':         MINSTREL_SKILLS,
+  'wanderer':         WANDERER_SKILLS,
+  'mechanic':         MECHANIC_SKILLS,
+  'genetic':          GENETIC_SKILLS,
+  'guillotine-cross': GUILLOTINE_CROSS_SKILLS,
+  // TODO: shadow-chaser, archbishop, sura, rune-knight, royal-guard, warlock, sorcerer, ranger
   // 4th classes
   'troubadour':   TROUBADOUR_SKILLS,
   'trouvere':     TROUVERE_SKILLS,
   'meister':      MEISTER_SKILLS,
   'biolo':        BIOLO_SKILLS,
-  // TODO: night-watch, abyss-chaser, cardinal, inquisitor
+  'night-watch':  NIGHT_WATCH_SKILLS,
+  // TODO: abyss-chaser, cardinal, inquisitor
   //       dragon-knight, imperial-guard, arch-mage, elemental-master, windhawk
 }
 
