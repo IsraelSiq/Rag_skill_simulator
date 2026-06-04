@@ -28,7 +28,7 @@ export type JobId =
   // 4th
   | 'dragon-knight' | 'imperial-guard'
   | 'arch-mage' | 'elemental-master'
-  | 'windhawk' | 'troubadour' | 'trouvere'
+  | 'wind-hawk' | 'troubadour' | 'trouvere'
   | 'meister' | 'biolo'
   | 'night-watch' | 'abyss-chaser'
   | 'cardinal' | 'inquisitor'
@@ -41,7 +41,6 @@ export interface Skill {
   element?: string
   description: string
   requires?: { skillId: string; level: number }[]
-  // nivel minimo de job pra desbloquear
   jobLevelReq?: number
 }
 
@@ -61,7 +60,6 @@ export interface AllocatedSkills {
 
 export interface SimulatorState {
   selectedJob: JobId | null
-  // stack de jobs para herdar skills (ex: lord-knight herda knight e swordman)
   jobChain: JobId[]
   allocated: AllocatedSkills
   totalPoints: number
