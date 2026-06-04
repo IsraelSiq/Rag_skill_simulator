@@ -35,6 +35,7 @@ import { CHAMPION_SKILLS } from './champion'
 import { RUNE_KNIGHT_SKILLS } from './rune-knight'
 import { ROYAL_GUARD_SKILLS } from './royal-guard'
 import { WARLOCK_SKILLS } from './warlock'
+import { SORCERER_SKILLS } from './sorcerer'
 import { MINSTREL_SKILLS } from './minstrel'
 import { WANDERER_SKILLS } from './wanderer'
 import { MECHANIC_SKILLS } from './mechanic'
@@ -54,6 +55,7 @@ import { INQUISITOR_SKILLS } from './inquisitor'
 import { DRAGON_KNIGHT_SKILLS } from './dragon-knight'
 import { IMPERIAL_GUARD_SKILLS } from './imperial-guard'
 import { ARCH_MAGE_SKILLS } from './arch-mage'
+import { ELEMENTAL_MASTER_SKILLS } from './elemental-master'
 
 export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   // 1ª classe
@@ -96,6 +98,7 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'rune-knight':      RUNE_KNIGHT_SKILLS,
   'royal-guard':      ROYAL_GUARD_SKILLS,
   'warlock':          WARLOCK_SKILLS,
+  'sorcerer':         SORCERER_SKILLS,
   'minstrel':         MINSTREL_SKILLS,
   'wanderer':         WANDERER_SKILLS,
   'mechanic':         MECHANIC_SKILLS,
@@ -104,20 +107,21 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'shadow-chaser':    SHADOW_CHASER_SKILLS,
   'archbishop':       ARCHBISHOP_SKILLS,
   'sura':             SURA_SKILLS,
-  // TODO: sorcerer, ranger
+  // TODO: ranger
   // 4th classes
-  'dragon-knight':  DRAGON_KNIGHT_SKILLS,
-  'imperial-guard': IMPERIAL_GUARD_SKILLS,
-  'arch-mage':      ARCH_MAGE_SKILLS,
-  'troubadour':     TROUBADOUR_SKILLS,
-  'trouvere':       TROUVERE_SKILLS,
-  'meister':        MEISTER_SKILLS,
-  'biolo':          BIOLO_SKILLS,
-  'night-watch':    NIGHT_WATCH_SKILLS,
-  'abyss-chaser':   ABYSS_CHASER_SKILLS,
-  'cardinal':       CARDINAL_SKILLS,
-  'inquisitor':     INQUISITOR_SKILLS,
-  // TODO: elemental-master, windhawk
+  'dragon-knight':    DRAGON_KNIGHT_SKILLS,
+  'imperial-guard':   IMPERIAL_GUARD_SKILLS,
+  'arch-mage':        ARCH_MAGE_SKILLS,
+  'elemental-master': ELEMENTAL_MASTER_SKILLS,
+  'troubadour':       TROUBADOUR_SKILLS,
+  'trouvere':         TROUVERE_SKILLS,
+  'meister':          MEISTER_SKILLS,
+  'biolo':            BIOLO_SKILLS,
+  'night-watch':      NIGHT_WATCH_SKILLS,
+  'abyss-chaser':     ABYSS_CHASER_SKILLS,
+  'cardinal':         CARDINAL_SKILLS,
+  'inquisitor':       INQUISITOR_SKILLS,
+  // TODO: windhawk
 }
 
 export function getSkillsForChain(jobChain: JobId[]): { jobId: JobId; skills: Skill[] }[] {
