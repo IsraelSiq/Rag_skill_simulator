@@ -7,17 +7,23 @@ export interface JobMeta {
   parent?: JobId
   skillPoints: number
   icon: string
+  expanded?: boolean // true = Expanded Class tree
 }
 
 export const JOBS: JobMeta[] = [
   // ─── Tier 1 ─────────────────────────────────────────────────────────────────
-  { id: 'novice',    name: 'Novice',    tier: 1, skillPoints: 9,  icon: '👶' },
-  { id: 'swordman',  name: 'Swordman',  tier: 1, skillPoints: 49, icon: '⚔️' },
-  { id: 'mage',      name: 'Mage',      tier: 1, skillPoints: 49, icon: '🔮' },
-  { id: 'archer',    name: 'Archer',    tier: 1, skillPoints: 49, icon: '🏹' },
-  { id: 'merchant',  name: 'Merchant',  tier: 1, skillPoints: 49, icon: '💰' },
-  { id: 'thief',     name: 'Thief',     tier: 1, skillPoints: 49, icon: '🗡️' },
-  { id: 'acolyte',   name: 'Acolyte',   tier: 1, skillPoints: 49, icon: '✝️' },
+  { id: 'novice',       name: 'Novice',       tier: 1, skillPoints: 9,  icon: '👶' },
+  { id: 'swordman',     name: 'Swordman',     tier: 1, skillPoints: 49, icon: '⚔️' },
+  { id: 'mage',         name: 'Mage',         tier: 1, skillPoints: 49, icon: '🔮' },
+  { id: 'archer',       name: 'Archer',       tier: 1, skillPoints: 49, icon: '🏹' },
+  { id: 'merchant',     name: 'Merchant',     tier: 1, skillPoints: 49, icon: '💰' },
+  { id: 'thief',        name: 'Thief',        tier: 1, skillPoints: 49, icon: '🗡️' },
+  { id: 'acolyte',      name: 'Acolyte',      tier: 1, skillPoints: 49, icon: '✝️' },
+  // Expanded 1st
+  { id: 'taekwon',      name: 'Taekwon',      tier: 1, parent: 'novice', skillPoints: 49, icon: '🥊', expanded: true },
+  { id: 'super-novice', name: 'Super Novice', tier: 1, parent: 'novice', skillPoints: 49, icon: '⭐', expanded: true },
+  { id: 'ninja',        name: 'Ninja',        tier: 1, parent: 'novice', skillPoints: 49, icon: '🥷', expanded: true },
+  { id: 'gunslinger',   name: 'Gunslinger',   tier: 1, parent: 'novice', skillPoints: 49, icon: '🔫', expanded: true },
 
   // ─── Tier 2 ─────────────────────────────────────────────────────────────────
   { id: 'knight',      name: 'Knight',      tier: 2, parent: 'swordman',  skillPoints: 69, icon: '🛡️' },
@@ -33,6 +39,13 @@ export const JOBS: JobMeta[] = [
   { id: 'rogue',       name: 'Rogue',       tier: 2, parent: 'thief',     skillPoints: 69, icon: '🎭' },
   { id: 'priest',      name: 'Priest',      tier: 2, parent: 'acolyte',   skillPoints: 69, icon: '🙏' },
   { id: 'monk',        name: 'Monk',        tier: 2, parent: 'acolyte',   skillPoints: 69, icon: '👊' },
+  // Expanded 2nd
+  { id: 'star-gladiator',       name: 'Star Gladiator',       tier: 2, parent: 'taekwon',      skillPoints: 69, icon: '★', expanded: true },
+  { id: 'soul-linker',          name: 'Soul Linker',          tier: 2, parent: 'taekwon',      skillPoints: 69, icon: '🔗', expanded: true },
+  { id: 'expanded-super-novice', name: 'Expanded Super Novice', tier: 2, parent: 'super-novice', skillPoints: 69, icon: '⭐⭐', expanded: true },
+  { id: 'kagerou',              name: 'Kagerou',              tier: 2, parent: 'ninja',         skillPoints: 69, icon: '🌸', expanded: true },
+  { id: 'oboro',                name: 'Oboro',                tier: 2, parent: 'ninja',         skillPoints: 69, icon: '🌙', expanded: true },
+  { id: 'rebellion',            name: 'Rebellion',            tier: 2, parent: 'gunslinger',   skillPoints: 69, icon: '🔥', expanded: true },
 
   // ─── Tier 3 (Trans) ─────────────────────────────────────────────────────────
   { id: 'lord-knight',     name: 'Lord Knight',     tier: 3, parent: 'knight',     skillPoints: 69, icon: '👑' },
@@ -48,6 +61,10 @@ export const JOBS: JobMeta[] = [
   { id: 'stalker',         name: 'Stalker',          tier: 3, parent: 'rogue',      skillPoints: 69, icon: '👁️' },
   { id: 'high-priest',     name: 'High Priest',      tier: 3, parent: 'priest',     skillPoints: 69, icon: '✨' },
   { id: 'champion',        name: 'Champion',         tier: 3, parent: 'monk',       skillPoints: 69, icon: '🥋' },
+  // Expanded 3rd
+  { id: 'star-emperor', name: 'Star Emperor', tier: 3, parent: 'star-gladiator', skillPoints: 69, icon: '🌟', expanded: true },
+  { id: 'soul-reaper',  name: 'Soul Reaper',  tier: 3, parent: 'soul-linker',   skillPoints: 69, icon: '💀', expanded: true },
+  { id: 'night-watch',  name: 'Night Watch',  tier: 3, parent: 'rebellion',     skillPoints: 69, icon: '🌌', expanded: true },
 
   // ─── Tier 4 (3rd class) ─────────────────────────────────────────────────────
   { id: 'rune-knight',      name: 'Rune Knight',      tier: 4, parent: 'lord-knight',    skillPoints: 69, icon: '🔮' },

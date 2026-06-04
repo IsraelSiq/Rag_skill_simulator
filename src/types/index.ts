@@ -1,9 +1,12 @@
 export type JobTree = 'novice' | 'swordman' | 'mage' | 'archer' | 'merchant' | 'thief' | 'acolyte'
+  | 'taekwon' | 'super-novice' | 'ninja' | 'gunslinger'
 
 export type JobId =
   // 1st
   | 'novice'
   | 'swordman' | 'mage' | 'archer' | 'merchant' | 'thief' | 'acolyte'
+  // Expanded 1st
+  | 'taekwon' | 'super-novice' | 'ninja' | 'gunslinger'
   // 2nd
   | 'knight' | 'crusader'
   | 'wizard' | 'sage'
@@ -11,6 +14,11 @@ export type JobId =
   | 'blacksmith' | 'alchemist'
   | 'assassin' | 'rogue'
   | 'priest' | 'monk'
+  // Expanded 2nd
+  | 'star-gladiator' | 'soul-linker'
+  | 'expanded-super-novice'
+  | 'kagerou' | 'oboro'
+  | 'rebellion'
   // Trans
   | 'lord-knight' | 'paladin'
   | 'high-wizard' | 'professor'
@@ -18,6 +26,9 @@ export type JobId =
   | 'whitesmith' | 'creator'
   | 'assassin-cross' | 'stalker'
   | 'high-priest' | 'champion'
+  // Expanded Trans/3rd
+  | 'star-emperor' | 'soul-reaper'
+  | 'night-watch'
   // 3rd
   | 'rune-knight' | 'royal-guard'
   | 'warlock' | 'sorcerer'
