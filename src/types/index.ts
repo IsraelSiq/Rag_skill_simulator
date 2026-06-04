@@ -30,7 +30,7 @@ export type JobId =
   | 'arch-mage' | 'elemental-master'
   | 'wind-hawk' | 'troubadour' | 'trouvere'
   | 'meister' | 'biolo'
-  | 'night-watch' | 'abyss-chaser'
+  | 'shadow-cross' | 'abyss-chaser'
   | 'cardinal' | 'inquisitor'
 
 export interface Skill {
@@ -48,7 +48,7 @@ export interface Job {
   id: JobId
   name: string
   tree: JobTree
-  tier: 1 | 2 | 3 | 4
+  tier: 1 | 2 | 3 | 4 | 5
   parent?: JobId
   maxSkillPoints: number
   skills: Skill[]

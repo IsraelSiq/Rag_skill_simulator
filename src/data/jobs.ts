@@ -3,7 +3,7 @@ import type { JobId } from '@/types'
 export interface JobMeta {
   id: JobId
   name: string
-  tier: 1 | 2 | 3 | 4
+  tier: 1 | 2 | 3 | 4 | 5
   parent?: JobId
   skillPoints: number
   icon: string
@@ -49,35 +49,35 @@ export const JOBS: JobMeta[] = [
   { id: 'high-priest',     name: 'High Priest',      tier: 3, parent: 'priest',     skillPoints: 134, icon: '✨' },
   { id: 'champion',        name: 'Champion',         tier: 3, parent: 'monk',       skillPoints: 134, icon: '🥋' },
 
-  // ─── Tier 4 (3rd class) ─────────────────────────────────────────────────────────
-  { id: 'rune-knight',     name: 'Rune Knight',      tier: 4, parent: 'lord-knight',    skillPoints: 200, icon: '🔮' },
-  { id: 'royal-guard',     name: 'Royal Guard',      tier: 4, parent: 'paladin',        skillPoints: 200, icon: '🛡️' },
-  { id: 'warlock',         name: 'Warlock',          tier: 4, parent: 'high-wizard',    skillPoints: 200, icon: '🌑' },
-  { id: 'sorcerer',        name: 'Sorcerer',         tier: 4, parent: 'professor',      skillPoints: 200, icon: '🌊' },
-  { id: 'ranger',          name: 'Ranger',           tier: 4, parent: 'sniper',         skillPoints: 200, icon: '🦅' },
-  { id: 'minstrel',        name: 'Minstrel',         tier: 4, parent: 'clown',          skillPoints: 200, icon: '🎶' },
-  { id: 'wanderer',        name: 'Wanderer',         tier: 4, parent: 'dancer',         skillPoints: 200, icon: '🌸' },
-  { id: 'mechanic',        name: 'Mechanic',         tier: 4, parent: 'whitesmith',     skillPoints: 200, icon: '🤖' },
-  { id: 'genetic',         name: 'Genetic',          tier: 4, parent: 'creator',        skillPoints: 200, icon: '🦫' },
-  { id: 'guillotine-cross',name: 'Guillotine Cross', tier: 4, parent: 'assassin-cross', skillPoints: 200, icon: '💠' },
-  { id: 'shadow-chaser',   name: 'Shadow Chaser',    tier: 4, parent: 'stalker',        skillPoints: 200, icon: '🌫️' },
-  { id: 'archbishop',      name: 'Archbishop',       tier: 4, parent: 'high-priest',    skillPoints: 200, icon: '⛪' },
-  { id: 'sura',            name: 'Sura',             tier: 4, parent: 'champion',       skillPoints: 200, icon: '🌪️' },
+  // ─── Tier 4 (3rd class) ─────────────────────────────────────────────────────
+  { id: 'rune-knight',      name: 'Rune Knight',      tier: 4, parent: 'lord-knight',    skillPoints: 200, icon: '🔮' },
+  { id: 'royal-guard',      name: 'Royal Guard',      tier: 4, parent: 'paladin',        skillPoints: 200, icon: '🛡️' },
+  { id: 'warlock',          name: 'Warlock',          tier: 4, parent: 'high-wizard',    skillPoints: 200, icon: '🌑' },
+  { id: 'sorcerer',         name: 'Sorcerer',         tier: 4, parent: 'professor',      skillPoints: 200, icon: '🌊' },
+  { id: 'ranger',           name: 'Ranger',           tier: 4, parent: 'sniper',         skillPoints: 200, icon: '🦅' },
+  { id: 'minstrel',         name: 'Minstrel',         tier: 4, parent: 'clown',          skillPoints: 200, icon: '🎶' },
+  { id: 'wanderer',         name: 'Wanderer',         tier: 4, parent: 'gypsy',          skillPoints: 200, icon: '🌸' },
+  { id: 'mechanic',         name: 'Mechanic',         tier: 4, parent: 'whitesmith',     skillPoints: 200, icon: '🤖' },
+  { id: 'genetic',          name: 'Genetic',          tier: 4, parent: 'creator',        skillPoints: 200, icon: '🦫' },
+  { id: 'guillotine-cross', name: 'Guillotine Cross', tier: 4, parent: 'assassin-cross', skillPoints: 200, icon: '💠' },
+  { id: 'shadow-chaser',    name: 'Shadow Chaser',    tier: 4, parent: 'stalker',        skillPoints: 200, icon: '🌫️' },
+  { id: 'archbishop',       name: 'Archbishop',       tier: 4, parent: 'high-priest',    skillPoints: 200, icon: '⛪' },
+  { id: 'sura',             name: 'Sura',             tier: 4, parent: 'champion',       skillPoints: 200, icon: '🌪️' },
 
-  // ─── Tier 5 (4th class) ─────────────────────────────────────────────────────────
-  { id: 'dragon-knight',   name: 'Dragon Knight',    tier: 4, parent: 'rune-knight',    skillPoints: 250, icon: '🐉' },
-  { id: 'imperial-guard',  name: 'Imperial Guard',   tier: 4, parent: 'royal-guard',    skillPoints: 250, icon: '🏰' },
-  { id: 'arch-mage',       name: 'Arch Mage',        tier: 4, parent: 'warlock',        skillPoints: 250, icon: '⚡' },
-  { id: 'elemental-master',name: 'Elemental Master', tier: 4, parent: 'sorcerer',       skillPoints: 250, icon: '🌈' },
-  { id: 'wind-hawk',       name: 'Wind Hawk',        tier: 4, parent: 'ranger',         skillPoints: 250, icon: '🦆' },
-  { id: 'troubadour',      name: 'Troubadour',       tier: 4, parent: 'minstrel',       skillPoints: 250, icon: '🎸' },
-  { id: 'trouvere',        name: 'Trouvere',         tier: 4, parent: 'wanderer',       skillPoints: 250, icon: '🎻' },
-  { id: 'meister',         name: 'Meister',          tier: 4, parent: 'mechanic',       skillPoints: 250, icon: '⚙️' },
-  { id: 'biolo',           name: 'Biolo',            tier: 4, parent: 'genetic',        skillPoints: 250, icon: '🔬' },
-  { id: 'night-watch',     name: 'Night Watch',      tier: 4, parent: 'guillotine-cross',skillPoints: 250, icon: '🌙' },
-  { id: 'abyss-chaser',    name: 'Abyss Chaser',     tier: 4, parent: 'shadow-chaser',  skillPoints: 250, icon: '🕳️' },
-  { id: 'cardinal',        name: 'Cardinal',         tier: 4, parent: 'archbishop',     skillPoints: 250, icon: '👼' },
-  { id: 'inquisitor',      name: 'Inquisitor',       tier: 4, parent: 'sura',           skillPoints: 250, icon: '⚖️' },
+  // ─── Tier 5 (4th class) ─────────────────────────────────────────────────────
+  { id: 'dragon-knight',    name: 'Dragon Knight',    tier: 5, parent: 'rune-knight',      skillPoints: 250, icon: '🐉' },
+  { id: 'imperial-guard',   name: 'Imperial Guard',   tier: 5, parent: 'royal-guard',      skillPoints: 250, icon: '🏰' },
+  { id: 'arch-mage',        name: 'Arch Mage',        tier: 5, parent: 'warlock',          skillPoints: 250, icon: '⚡' },
+  { id: 'elemental-master', name: 'Elemental Master', tier: 5, parent: 'sorcerer',         skillPoints: 250, icon: '🌈' },
+  { id: 'wind-hawk',        name: 'Wind Hawk',        tier: 5, parent: 'ranger',           skillPoints: 250, icon: '🦆' },
+  { id: 'troubadour',       name: 'Troubadour',       tier: 5, parent: 'minstrel',         skillPoints: 250, icon: '🎸' },
+  { id: 'trouvere',         name: 'Trouvere',         tier: 5, parent: 'wanderer',         skillPoints: 250, icon: '🎻' },
+  { id: 'meister',          name: 'Meister',          tier: 5, parent: 'mechanic',         skillPoints: 250, icon: '⚙️' },
+  { id: 'biolo',            name: 'Biolo',            tier: 5, parent: 'genetic',          skillPoints: 250, icon: '🔬' },
+  { id: 'shadow-cross',     name: 'Shadow Cross',     tier: 5, parent: 'guillotine-cross', skillPoints: 250, icon: '🌙' },
+  { id: 'abyss-chaser',     name: 'Abyss Chaser',     tier: 5, parent: 'shadow-chaser',   skillPoints: 250, icon: '🕳️' },
+  { id: 'cardinal',         name: 'Cardinal',         tier: 5, parent: 'archbishop',       skillPoints: 250, icon: '👼' },
+  { id: 'inquisitor',       name: 'Inquisitor',       tier: 5, parent: 'sura',             skillPoints: 250, icon: '⚖️' },
 ]
 
 export function getJobChain(jobId: JobId): JobId[] {
@@ -97,6 +97,7 @@ export const JOBS_BY_TIER: Record<number, JobMeta[]> = {
   2: JOBS.filter(j => j.tier === 2 && j.id !== 'novice'),
   3: JOBS.filter(j => j.tier === 3),
   4: JOBS.filter(j => j.tier === 4),
+  5: JOBS.filter(j => j.tier === 5),
 }
 
 export function getJobChildren(jobId: JobId): JobMeta[] {

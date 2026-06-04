@@ -82,7 +82,7 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   rogue:      ROGUE_SKILLS,
   priest:     PRIEST_SKILLS,
   monk:       MONK_SKILLS,
-  // Trans (todas cobertas)
+  // Trans
   'lord-knight':    LORD_KNIGHT_SKILLS,
   'paladin':        PALADIN_SKILLS,
   'high-wizard':    HIGH_WIZARD_SKILLS,
@@ -96,7 +96,7 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'stalker':        STALKER_SKILLS,
   'high-priest':    HIGH_PRIEST_SKILLS,
   'champion':       CHAMPION_SKILLS,
-  // 3rd classes (todas cobertas)
+  // 3rd classes
   'rune-knight':      RUNE_KNIGHT_SKILLS,
   'royal-guard':      ROYAL_GUARD_SKILLS,
   'warlock':          WARLOCK_SKILLS,
@@ -110,7 +110,7 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'shadow-chaser':    SHADOW_CHASER_SKILLS,
   'archbishop':       ARCHBISHOP_SKILLS,
   'sura':             SURA_SKILLS,
-  // 4th classes (todas cobertas)
+  // 4th classes
   'dragon-knight':    DRAGON_KNIGHT_SKILLS,
   'imperial-guard':   IMPERIAL_GUARD_SKILLS,
   'arch-mage':        ARCH_MAGE_SKILLS,
@@ -120,7 +120,7 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'trouvere':         TROUVERE_SKILLS,
   'meister':          MEISTER_SKILLS,
   'biolo':            BIOLO_SKILLS,
-  'night-watch':      NIGHT_WATCH_SKILLS,
+  'shadow-cross':     NIGHT_WATCH_SKILLS,
   'abyss-chaser':     ABYSS_CHASER_SKILLS,
   'cardinal':         CARDINAL_SKILLS,
   'inquisitor':       INQUISITOR_SKILLS,
