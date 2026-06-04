@@ -1,0 +1,76 @@
+import type { Skill } from '@/types'
+
+export const LORD_KNIGHT_SKILLS: Skill[] = [
+  {
+    id: 'lk_aurablade',
+    name: 'Aura Blade',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Envolve a arma em uma aura que adiciona dano fixo por 60s. Nível 5: +100 ATK flat ignorando DEF.',
+  },
+  {
+    id: 'lk_parrying',
+    name: 'Parrying',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Chance de bloquear ataques físicos com espada de duas mãos por 30s. Nível 10: 50% de chance.',
+    requires: [{ skillId: 'kn_twohand_quicken', level: 5 }],
+  },
+  {
+    id: 'lk_concentration',
+    name: 'Berserk Pitfou',
+    maxLevel: 5,
+    type: 'passive',
+    description: 'Aumenta ATK com espada de duas mãos baseado em STR.',
+  },
+  {
+    id: 'lk_tensionrelax',
+    name: 'Tension Relax',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Senta e regenera HP rapidamente. Regeneração 5x mais rápida, mas impede movimento.',
+  },
+  {
+    id: 'lk_berserk',
+    name: 'Berserk',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Estado berserk: HP cai para 100, SP para 0, DEF e MDEF zeradas, mas ATK e ASPD aumentam drasticamente. Dura 300s ou até HP chegar a 100.',
+    requires: [
+      { skillId: 'lk_aurablade', level: 5 },
+      { skillId: 'lk_parrying', level: 5 },
+      { skillId: 'lk_tensionrelax', level: 1 },
+    ],
+  },
+  {
+    id: 'lk_spiralpierce',
+    name: 'Spiral Pierce',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Perfura o alvo com lança em espiral causando dano neutro ignorando cards de redução. Aplica slow.',
+    requires: [{ skillId: 'kn_spear_boomerang', level: 3 }],
+  },
+  {
+    id: 'lk_headcrush',
+    name: 'Head Crush',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Golpe que causa sangramento no alvo. Bleeding causa dano por tempo e reduz ATK.',
+    requires: [{ skillId: 'kn_brandish_spear', level: 5 }],
+  },
+  {
+    id: 'lk_jointbeat',
+    name: 'Joint Beat',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Golpe com lança que aleatoriza penalidade nas juntas do alvo (reduz ATK, ASPD, FLEE, DEF ou Move Speed).',
+    requires: [{ skillId: 'lk_headcrush', level: 5 }],
+  },
+  {
+    id: 'lk_crush_strike',
+    name: 'Crush Strike',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Destrói a arma equipada para causar dano enorme baseado no valor da arma. Uso único por arma.',
+  },
+]
