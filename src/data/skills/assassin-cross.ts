@@ -1,0 +1,75 @@
+import type { Skill } from '@/types'
+
+export const ASSASSIN_CROSS_SKILLS: Skill[] = [
+  {
+    id: 'sx_sonicaccel',
+    name: 'Sonic Acceleration',
+    maxLevel: 5,
+    type: 'passive',
+    description: 'Aumenta dano e velocidade de cast do Sonic Blow. Nível 5: +10% dano e reduz delay.',
+    requires: [{ skillId: 'as_sonicblow', level: 5 }],
+  },
+  {
+    id: 'sx_katarmastery',
+    name: 'Advanced Katar Research',
+    maxLevel: 5,
+    type: 'passive',
+    description: 'Aumenta ATK e taxa de crítico com Katar além do Katar Mastery base.',
+    requires: [{ skillId: 'as_katar_mastery', level: 7 }],
+  },
+  {
+    id: 'sx_meteorassault',
+    name: 'Meteor Assault',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Gira rapidamente causando dano físico AoE ao redor com chance de causar Stun, Confusion e Blind. Útil com Katar.',
+    requires: [
+      { skillId: 'as_sonicblow', level: 5 },
+      { skillId: 'as_katar_mastery', level: 5 },
+    ],
+  },
+  {
+    id: 'sx_shadowattack',
+    name: 'Shadow Attack',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Ataque nas sombras que causa dano e puxa o alvo em direção ao caster. Usável em Cloaking.',
+    requires: [{ skillId: 'as_cloaking', level: 5 }],
+  },
+  {
+    id: 'sx_enchantdeadly',
+    name: 'Enchant Deadly Poison',
+    maxLevel: 5,
+    type: 'active',
+    element: 'Veneno',
+    description: 'Encha a arma com veneno mortal que multiplica o dano de veneno. O veneno mais poderoso do jogo — dano contínuo devastador.',
+    requires: [
+      { skillId: 'as_enchant_poison', level: 10 },
+      { skillId: 'as_venom_dust', level: 5 },
+    ],
+  },
+  {
+    id: 'sx_cloakingexceed',
+    name: 'Cloaking Exceed',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Invisibilidade de alta mobilidade com mais duração e sem necessidade de estar próximo a parede.',
+    requires: [{ skillId: 'as_cloaking', level: 10 }],
+  },
+  {
+    id: 'sx_righthandmastery',
+    name: 'Righthand Mastery EX',
+    maxLevel: 5,
+    type: 'passive',
+    description: 'Versão avançada de Right-Hand Mastery, zerando a penalidade de ATK na mão direita com dual-wield.',
+    requires: [{ skillId: 'as_right_hand_mastery', level: 5 }],
+  },
+  {
+    id: 'sx_lefthandmastery',
+    name: 'Lefthand Mastery EX',
+    maxLevel: 5,
+    type: 'passive',
+    description: 'Versão avançada de Left-Hand Mastery, zerando a penalidade de ATK na mão esquerda com dual-wield.',
+    requires: [{ skillId: 'as_left_hand_mastery', level: 5 }],
+  },
+]
