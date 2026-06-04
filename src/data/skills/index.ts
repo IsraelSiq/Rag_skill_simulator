@@ -25,8 +25,11 @@ import { HIGH_WIZARD_SKILLS } from './high-wizard'
 import { PROFESSOR_SKILLS } from './professor'
 import { SNIPER_SKILLS } from './sniper'
 import { CLOWN_SKILLS } from './clown'
+import { GYPSY_SKILLS } from './gypsy'
 import { MINSTREL_SKILLS } from './minstrel'
+import { WANDERER_SKILLS } from './wanderer'
 import { TROUBADOUR_SKILLS } from './troubadour'
+import { TROUVERE_SKILLS } from './trouvere'
 
 export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   // 1ª classe
@@ -58,14 +61,17 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'professor':    PROFESSOR_SKILLS,
   'sniper':       SNIPER_SKILLS,
   'clown':        CLOWN_SKILLS,
-  // TODO: gypsy, whitesmith, creator, assassin-cross, stalker, high-priest, champion
+  'gypsy':        GYPSY_SKILLS,
+  // TODO: whitesmith, creator, assassin-cross, stalker, high-priest, champion
   // 3rd classes
   'minstrel':     MINSTREL_SKILLS,
-  // TODO: wanderer, rune-knight, royal-guard, warlock, sorcerer, ranger,
+  'wanderer':     WANDERER_SKILLS,
+  // TODO: rune-knight, royal-guard, warlock, sorcerer, ranger,
   //       mechanic, genetic, guillotine-cross, shadow-chaser, archbishop, sura
   // 4th classes
   'troubadour':   TROUBADOUR_SKILLS,
-  // TODO: trouvere, dragon-knight, imperial-guard, arch-mage, elemental-master,
+  'trouvere':     TROUVERE_SKILLS,
+  // TODO: dragon-knight, imperial-guard, arch-mage, elemental-master,
   //       windhawk, meister, biolo, night-watch, abyss-chaser, cardinal, inquisitor
 }
 
