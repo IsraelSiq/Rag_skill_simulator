@@ -22,6 +22,7 @@ import { MONK_SKILLS } from './monk'
 import { LORD_KNIGHT_SKILLS } from './lord-knight'
 import { PALADIN_SKILLS } from './paladin'
 import { HIGH_WIZARD_SKILLS } from './high-wizard'
+import { PROFESSOR_SKILLS } from './professor'
 
 export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   // 1ª classe
@@ -50,8 +51,9 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'lord-knight':  LORD_KNIGHT_SKILLS,
   'paladin':      PALADIN_SKILLS,
   'high-wizard':  HIGH_WIZARD_SKILLS,
-  // TODO: professor, sniper, clown, gypsy,
-  //       whitesmith, creator, assassin-cross, stalker, high-priest, champion
+  'professor':    PROFESSOR_SKILLS,
+  // TODO: sniper, clown, gypsy, whitesmith, creator,
+  //       assassin-cross, stalker, high-priest, champion
   // TODO: 3rd classes (rune-knight, warlock, ranger, etc.)
   // TODO: 4th classes (dragon-knight, arch-mage, etc.)
 }
