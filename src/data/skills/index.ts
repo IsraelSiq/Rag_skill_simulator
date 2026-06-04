@@ -31,6 +31,7 @@ import { CREATOR_SKILLS } from './creator'
 import { ASSASSIN_CROSS_SKILLS } from './assassin-cross'
 import { STALKER_SKILLS } from './stalker'
 import { HIGH_PRIEST_SKILLS } from './high-priest'
+import { CHAMPION_SKILLS } from './champion'
 import { MINSTREL_SKILLS } from './minstrel'
 import { WANDERER_SKILLS } from './wanderer'
 import { MECHANIC_SKILLS } from './mechanic'
@@ -38,6 +39,7 @@ import { GENETIC_SKILLS } from './genetic'
 import { GUILLOTINE_CROSS_SKILLS } from './guillotine-cross'
 import { SHADOW_CHASER_SKILLS } from './shadow-chaser'
 import { ARCHBISHOP_SKILLS } from './archbishop'
+import { SURA_SKILLS } from './sura'
 import { TROUBADOUR_SKILLS } from './troubadour'
 import { TROUVERE_SKILLS } from './trouvere'
 import { MEISTER_SKILLS } from './meister'
@@ -45,6 +47,7 @@ import { BIOLO_SKILLS } from './biolo'
 import { NIGHT_WATCH_SKILLS } from './night-watch'
 import { ABYSS_CHASER_SKILLS } from './abyss-chaser'
 import { CARDINAL_SKILLS } from './cardinal'
+import { INQUISITOR_SKILLS } from './inquisitor'
 
 export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   // 1ª classe
@@ -69,7 +72,7 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   rogue:      ROGUE_SKILLS,
   priest:     PRIEST_SKILLS,
   monk:       MONK_SKILLS,
-  // Trans
+  // Trans (todas cobertas)
   'lord-knight':    LORD_KNIGHT_SKILLS,
   'paladin':        PALADIN_SKILLS,
   'high-wizard':    HIGH_WIZARD_SKILLS,
@@ -82,7 +85,7 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'assassin-cross': ASSASSIN_CROSS_SKILLS,
   'stalker':        STALKER_SKILLS,
   'high-priest':    HIGH_PRIEST_SKILLS,
-  // TODO: champion
+  'champion':       CHAMPION_SKILLS,
   // 3rd classes
   'minstrel':         MINSTREL_SKILLS,
   'wanderer':         WANDERER_SKILLS,
@@ -91,7 +94,8 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'guillotine-cross': GUILLOTINE_CROSS_SKILLS,
   'shadow-chaser':    SHADOW_CHASER_SKILLS,
   'archbishop':       ARCHBISHOP_SKILLS,
-  // TODO: sura, rune-knight, royal-guard, warlock, sorcerer, ranger
+  'sura':             SURA_SKILLS,
+  // TODO: rune-knight, royal-guard, warlock, sorcerer, ranger
   // 4th classes
   'troubadour':    TROUBADOUR_SKILLS,
   'trouvere':      TROUVERE_SKILLS,
@@ -100,8 +104,8 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'night-watch':   NIGHT_WATCH_SKILLS,
   'abyss-chaser':  ABYSS_CHASER_SKILLS,
   'cardinal':      CARDINAL_SKILLS,
-  // TODO: inquisitor, dragon-knight, imperial-guard,
-  //       arch-mage, elemental-master, windhawk
+  'inquisitor':    INQUISITOR_SKILLS,
+  // TODO: dragon-knight, imperial-guard, arch-mage, elemental-master, windhawk
 }
 
 export function getSkillsForChain(jobChain: JobId[]): { jobId: JobId; skills: Skill[] }[] {
