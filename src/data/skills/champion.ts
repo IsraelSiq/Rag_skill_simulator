@@ -1,0 +1,68 @@
+import type { Skill } from '@/types'
+
+export const CHAMPION_SKILLS: Skill[] = [
+  {
+    id: 'ch_tigerfist',
+    name: 'Tiger Knuckle Fist',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Golpe de combo poderoso disponível após Chain Combo. Dano superior ao Combo Finish.',
+    requires: [{ skillId: 'mo_chaincombo', level: 5 }],
+  },
+  {
+    id: 'ch_dragoncombo',
+    name: 'Dragon Combo',
+    maxLevel: 10,
+    type: 'active',
+    description: 'Golpe final definitivo da cadeia de combo. Dano máximo do sistema de combos do Champion.',
+    requires: [{ skillId: 'ch_tigerfist', level: 3 }],
+  },
+  {
+    id: 'ch_rampagefist',
+    name: 'Rampage Blast',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Explosão de Spirit Spheres que causa dano AoE massivo ao redor. Consome todas as spheres disponíveis.',
+    requires: [{ skillId: 'mo_explosionspirits', level: 5 }],
+  },
+  {
+    id: 'ch_guillotinefist',
+    name: 'Guillotine Fist',
+    maxLevel: 5,
+    type: 'active',
+    description: 'O golpe mais destrutivo do Champion. Consome todas as Spirit Spheres para causar dano devastador em alvo único. Dano escala com spheres gastas.',
+    requires: [{ skillId: 'mo_callspirits', level: 5 }, { skillId: 'mo_explosionspirits', level: 3 }],
+  },
+  {
+    id: 'ch_palmstrike',
+    name: 'Zen',
+    maxLevel: 1,
+    type: 'active',
+    description: 'Invoca imediatamente 5 Spirit Spheres de uma só vez. Permite usar Guillotine Fist sem acumulação manual.',
+    requires: [{ skillId: 'mo_callspirits', level: 5 }],
+  },
+  {
+    id: 'ch_shunshin',
+    name: 'Gentle Touch - Convert',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Converte parte do SP do Champion em Spirit Spheres adicionais, ou converte spheres em SP.',
+    requires: [{ skillId: 'mo_absorbspirits', level: 1 }],
+  },
+  {
+    id: 'ch_palmstrike2',
+    name: 'Gentle Touch - Cure',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Remove um status negativo de aliado consumindo Spirit Spheres. Nível maior remove status mais graves.',
+    requires: [{ skillId: 'ch_shunshin', level: 3 }],
+  },
+  {
+    id: 'ch_investigate',
+    name: 'Knuckle Boost',
+    maxLevel: 5,
+    type: 'active',
+    description: 'Aumenta dano de ataque básico e combos com socos baseado no número de Spirit Spheres ativas.',
+    requires: [{ skillId: 'mo_investigate', level: 5 }],
+  },
+]
