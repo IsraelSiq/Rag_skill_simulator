@@ -27,12 +27,15 @@ import { SNIPER_SKILLS } from './sniper'
 import { CLOWN_SKILLS } from './clown'
 import { GYPSY_SKILLS } from './gypsy'
 import { WHITESMITH_SKILLS } from './whitesmith'
+import { CREATOR_SKILLS } from './creator'
 import { MINSTREL_SKILLS } from './minstrel'
 import { WANDERER_SKILLS } from './wanderer'
 import { MECHANIC_SKILLS } from './mechanic'
+import { GENETIC_SKILLS } from './genetic'
 import { TROUBADOUR_SKILLS } from './troubadour'
 import { TROUVERE_SKILLS } from './trouvere'
 import { MEISTER_SKILLS } from './meister'
+import { BIOLO_SKILLS } from './biolo'
 
 export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   // 1ª classe
@@ -66,18 +69,21 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'clown':        CLOWN_SKILLS,
   'gypsy':        GYPSY_SKILLS,
   'whitesmith':   WHITESMITH_SKILLS,
-  // TODO: creator, assassin-cross, stalker, high-priest, champion
+  'creator':      CREATOR_SKILLS,
+  // TODO: assassin-cross, stalker, high-priest, champion
   // 3rd classes
   'minstrel':     MINSTREL_SKILLS,
   'wanderer':     WANDERER_SKILLS,
   'mechanic':     MECHANIC_SKILLS,
-  // TODO: genetic, guillotine-cross, shadow-chaser, archbishop, sura
+  'genetic':      GENETIC_SKILLS,
+  // TODO: guillotine-cross, shadow-chaser, archbishop, sura
   //       rune-knight, royal-guard, warlock, sorcerer, ranger
   // 4th classes
   'troubadour':   TROUBADOUR_SKILLS,
   'trouvere':     TROUVERE_SKILLS,
   'meister':      MEISTER_SKILLS,
-  // TODO: biolo, night-watch, abyss-chaser, cardinal, inquisitor
+  'biolo':        BIOLO_SKILLS,
+  // TODO: night-watch, abyss-chaser, cardinal, inquisitor
   //       dragon-knight, imperial-guard, arch-mage, elemental-master, windhawk
 }
 
