@@ -1,23 +1,27 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import type { Skill, AllocatedSkills } from '@/types'
 import { findSkill } from '@/data/skills'
 
-const ELEMENT_COLOR: Record<string, string> = {
-  'Fogo':       'text-red-400',
-  'Água':       'text-blue-400',
-  'Vento':      'text-green-300',
-  'Terra':      'text-amber-400',
-  'Sagrado':    'text-yellow-300',
-  'Sombra':     'text-purple-400',
-  'Veneno':     'text-lime-400',
-  'Fantasma':   'text-indigo-300',
-  'Morto-vivo': 'text-rose-400',
+// ─── helpers ────────────────────────────────────────────────────────────────
+
+const ELEMENT_COLOR: Record<string, { text: string; bg: string }> = {
+  'Fogo':       { text: 'text-red-400',    bg: 'bg-red-400/10'    },
+  'Agua':       { text: 'text-blue-400',   bg: 'bg-blue-400/10'   },
+  'Água':       { text: 'text-blue-400',   bg: 'bg-blue-400/10'   },
+  'Vento':      { text: 'text-emerald-300',bg: 'bg-emerald-300/10'},
+  'Terra':      { text: 'text-amber-400',  bg: 'bg-amber-400/10'  },
+  'Sagrado':    { text: 'text-yellow-300', bg: 'bg-yellow-300/10' },
+  'Sombra':     { text: 'text-purple-400', bg: 'bg-purple-400/10' },
+  'Veneno':     { text: 'text-lime-400',   bg: 'bg-lime-400/10'   },
+  'Fantasma':   { text: 'text-indigo-300', bg: 'bg-indigo-300/10' },
+  'Neutro':     { text: 'text-rag-muted',  bg: 'bg-rag-surface2'  },
+  'Morto-vivo': { text: 'text-rose-400',   bg: 'bg-rose-400/10'   },
 }
 
-const TYPE_ICON: Record<string, string> = {
-  active:  '⚡',
-  passive: '📘',
-  toggle:  '🔄',
+const TYPE_CONFIG: Record<string, { icon: string; label: string; color: string }> = {
+  active:  { icon: '⚡', label: 'Ativa',   color: 'text-rag-accent' },
+  passive: { icon: '📘', label: 'Passiva', color: 'text-rag-muted'  },
+  toggle:  { icon: '🔄', label: 'Toggle',  color: 'text-rag-gold'   },
 }
 
 function isUnlocked(skill: Skill, allocated: AllocatedSkills): boolean {
@@ -25,15 +29,137 @@ function isUnlocked(skill: Skill, allocated: AllocatedSkills): boolean {
   return skill.requires.every(req => (allocated[req.skillId] ?? 0) >= req.level)
 }
 
-function getMissingDeps(skill: Skill, allocated: AllocatedSkills): string[] {
+function getMissingDeps(skill: Skill, allocated: AllocatedSkills) {
   if (!skill.requires) return []
   return skill.requires
     .filter(req => (allocated[req.skillId] ?? 0) < req.level)
     .map(req => {
       const dep = findSkill(req.skillId)
-      return `${dep?.name ?? req.skillId} Lv.${req.level}`
+      return { name: dep?.name ?? req.skillId, level: req.level }
     })
 }
+
+// ─── barra de nível ───────────────────────────────────────────────────────────────
+
+function LevelBar({ current, max, isMaxed }: { current: number; max: number; isMaxed: boolean }) {
+  // Para maxLevel alto (>= 7): barra contínua com progress %
+  if (max >= 7) {
+    const pct = max === 0 ? 0 : Math.round((current / max) * 100)
+    return (
+      <div className="w-full h-1.5 bg-rag-faint/30 rounded-full overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all duration-300 ${ isMaxed ? 'bg-rag-gold' : 'bg-rag-accent' }`}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+    )
+  }
+
+  // Para maxLevel pequeno (<= 6): segmentos individuais
+  return (
+    <div className="flex gap-0.5 w-full">
+      {Array.from({ length: max }).map((_, i) => (
+        <div
+          key={i}
+          className={`flex-1 h-1.5 rounded-full transition-all duration-150 ${
+            i < current
+              ? (isMaxed ? 'bg-rag-gold' : 'bg-rag-accent')
+              : 'bg-rag-faint/30'
+          }`}
+        />
+      ))}
+    </div>
+  )
+}
+
+// ─── tooltip ────────────────────────────────────────────────────────────────────
+
+interface TooltipProps {
+  skill: Skill
+  allocated: AllocatedSkills
+  anchorRef: React.RefObject<HTMLButtonElement | null>
+}
+
+function Tooltip({ skill, allocated, anchorRef }: TooltipProps) {
+  const missing = getMissingDeps(skill, allocated)
+  const elemStyle = skill.element ? (ELEMENT_COLOR[skill.element] ?? { text: 'text-rag-muted', bg: '' }) : null
+  const typeConf  = TYPE_CONFIG[skill.type] ?? TYPE_CONFIG.active
+
+  // Decide se abre para cima ou para baixo baseado na posição do botão
+  const openAbove = (() => {
+    if (!anchorRef.current) return true
+    const rect = anchorRef.current.getBoundingClientRect()
+    return rect.top > 220 // espaço suficiente acima?
+  })()
+
+  return (
+    <div
+      className={`
+        absolute ${ openAbove ? 'bottom-full mb-2' : 'top-full mt-2' }
+        left-1/2 -translate-x-1/2
+        z-50 w-64 bg-rag-surface2 border border-rag-border rounded-xl p-3.5
+        shadow-2xl pointer-events-none
+        animate-in fade-in-0 zoom-in-95 duration-100
+      `}
+    >
+      {/* Header do tooltip */}
+      <div className="flex items-center justify-between gap-2 mb-2">
+        <p className="font-semibold text-rag-text text-sm leading-tight">{skill.name}</p>
+        <span className={`text-xs font-medium shrink-0 ${typeConf.color}`}>
+          {typeConf.icon} {typeConf.label}
+        </span>
+      </div>
+
+      {/* Elemento */}
+      {elemStyle && skill.element && (
+        <span className={`inline-block text-xs font-medium px-2 py-0.5 rounded-full mb-2 ${elemStyle.text} ${elemStyle.bg}`}>
+          ● {skill.element}
+        </span>
+      )}
+
+      {/* Descrição */}
+      <p className="text-rag-muted text-xs leading-relaxed mb-2.5">{skill.description}</p>
+
+      {/* Require’s */}
+      {skill.requires && skill.requires.length > 0 && (
+        <div className="border-t border-rag-border/60 pt-2 mb-2">
+          <p className="text-rag-faint text-xs font-semibold mb-1.5 uppercase tracking-wide">Requer</p>
+          {skill.requires.map(req => {
+            const dep = findSkill(req.skillId)
+            const met = (allocated[req.skillId] ?? 0) >= req.level
+            return (
+              <div key={req.skillId} className="flex items-center gap-1.5 mb-1">
+                <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-xs shrink-0 ${
+                  met ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
+                }`}>
+                  {met ? '✓' : '✗'}
+                </span>
+                <span className={`text-xs ${ met ? 'text-rag-muted' : 'text-rag-text' }`}>
+                  {dep?.name ?? req.skillId}
+                  <span className="text-rag-faint ml-1">Lv.{req.level}</span>
+                </span>
+              </div>
+            )
+          })}
+        </div>
+      )}
+
+      {/* Auto-aloca aviso */}
+      {missing.length > 0 && (
+        <p className="text-rag-accent text-xs bg-rag-accent/8 rounded-lg px-2 py-1.5 mb-2">
+          ⚡ Vai alocar: {missing.map(m => `${m.name} Lv.${m.level}`).join(', ')}
+        </p>
+      )}
+
+      {/* Hint de controles */}
+      <p className="text-rag-faint text-xs border-t border-rag-border/40 pt-2 mt-1">
+        Clique: +1 · Clique direito: √21
+      </p>
+    </div>
+  )
+}
+
+// ─── card principal ────────────────────────────────────────────────────────────────
 
 interface Props {
   skill: Skill
@@ -44,109 +170,100 @@ interface Props {
 
 export function SkillCard({ skill, currentLevel, allocated, onSetLevel }: Props) {
   const [showTooltip, setShowTooltip] = useState(false)
+  const [pressed, setPressed] = useState(false)
+  const btnRef = useRef<HTMLButtonElement>(null)
+
   const unlocked = isUnlocked(skill, allocated)
-  const missing = getMissingDeps(skill, allocated)
-  const isMaxed = currentLevel >= skill.maxLevel
+  const isMaxed  = currentLevel >= skill.maxLevel
+  const hasLevel = currentLevel > 0
+  const locked   = !unlocked && !hasLevel
 
   function handleClick() {
     if (isMaxed) {
-      onSetLevel(skill.id, 0) // reset ao clicar no máximo
+      onSetLevel(skill.id, 0)
     } else {
-      onSetLevel(skill.id, currentLevel + 1) // auto-aloca deps
+      onSetLevel(skill.id, currentLevel + 1)
     }
+    // feedback visual de press
+    setPressed(true)
+    setTimeout(() => setPressed(false), 120)
   }
 
   function handleRightClick(e: React.MouseEvent) {
     e.preventDefault()
-    if (currentLevel > 0) onSetLevel(skill.id, currentLevel - 1)
+    if (currentLevel > 0) {
+      onSetLevel(skill.id, currentLevel - 1)
+      setPressed(true)
+      setTimeout(() => setPressed(false), 120)
+    }
   }
+
+  // Determina classe de estilo do card
+  const cardStyle = locked
+    ? 'opacity-40 border-rag-border bg-rag-surface cursor-not-allowed'
+    : isMaxed
+    ? 'border-rag-gold/60 bg-rag-gold/8 shadow-sm'
+    : hasLevel
+    ? 'border-rag-accent/50 bg-rag-accent/8'
+    : 'border-rag-border bg-rag-surface hover:border-rag-muted/50 hover:bg-rag-surface2'
+
+  const elemStyle = skill.element ? (ELEMENT_COLOR[skill.element] ?? null) : null
 
   return (
     <div className="relative">
       <button
+        ref={btnRef}
         onClick={handleClick}
         onContextMenu={handleRightClick}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
+        onFocus={() => setShowTooltip(true)}
+        onBlur={() => setShowTooltip(false)}
+        disabled={locked}
+        aria-label={`${skill.name} — nível ${currentLevel} de ${skill.maxLevel}`}
         className={`
-          w-full flex flex-col gap-1.5 p-3 rounded-xl border text-left transition-all
-          ${ !unlocked && currentLevel === 0
-            ? 'opacity-40 border-rag-border bg-rag-surface cursor-not-allowed'
-            : isMaxed
-            ? 'border-rag-gold/60 bg-rag-gold/10 text-rag-gold'
-            : currentLevel > 0
-            ? 'border-rag-accent/50 bg-rag-accent/10'
-            : 'border-rag-border bg-rag-surface hover:border-rag-muted hover:bg-rag-surface2'
-          }
+          w-full flex flex-col gap-1.5 p-3 rounded-xl border text-left
+          transition-all duration-150
+          ${ pressed ? 'scale-95' : 'scale-100' }
+          ${ cardStyle }
         `}
       >
-        {/* Header */}
+        {/* Header: nome + ícone de tipo */}
         <div className="flex items-start justify-between gap-1">
-          <span className="text-xs font-semibold text-rag-text leading-tight">{skill.name}</span>
-          <span className="text-xs shrink-0">{TYPE_ICON[skill.type]}</span>
+          <span className={`text-xs font-semibold leading-tight ${ isMaxed ? 'text-rag-gold' : hasLevel ? 'text-rag-text' : 'text-rag-muted' }`}>
+            {skill.name}
+          </span>
+          <span className="text-xs shrink-0 leading-none opacity-70">
+            {TYPE_CONFIG[skill.type]?.icon ?? '⚡'}
+          </span>
         </div>
 
-        {/* Elemento */}
-        {skill.element && (
-          <span className={`text-xs font-medium ${ELEMENT_COLOR[skill.element] ?? 'text-rag-muted'}`}>
+        {/* Elemento badge (só se houver) */}
+        {elemStyle && skill.element && (
+          <span className={`text-xs font-medium w-fit px-1.5 py-px rounded-md ${elemStyle.text} ${elemStyle.bg}`}>
             {skill.element}
           </span>
         )}
 
-        {/* Nível */}
-        <div className="flex items-center justify-between mt-auto">
-          <div className="flex gap-0.5">
-            {Array.from({ length: skill.maxLevel }).map((_, i) => (
-              <div
-                key={i}
-                className={`h-1.5 rounded-full ${
-                  i < currentLevel ? (isMaxed ? 'bg-rag-gold' : 'bg-rag-accent') : 'bg-rag-faint'
-                }`}
-                style={{ width: Math.max(4, Math.floor(64 / skill.maxLevel)) }}
-              />
-            ))}
+        {/* Spacer para empurrar barra para baixo */}
+        <div className="flex-1" />
+
+        {/* Barra de nível + contador */}
+        <div className="flex items-center gap-2">
+          <div className="flex-1">
+            <LevelBar current={currentLevel} max={skill.maxLevel} isMaxed={isMaxed} />
           </div>
-          <span className={`text-xs font-bold tabular-nums ${
-            isMaxed ? 'text-rag-gold' : currentLevel > 0 ? 'text-rag-accent' : 'text-rag-faint'
+          <span className={`text-xs font-bold tabular-nums shrink-0 ${
+            isMaxed ? 'text-rag-gold' : hasLevel ? 'text-rag-accent' : 'text-rag-faint'
           }`}>
             {currentLevel}/{skill.maxLevel}
           </span>
         </div>
       </button>
 
-      {/* Tooltip */}
+      {/* Tooltip — renderizado apenas quando visível */}
       {showTooltip && (
-        <div className="absolute bottom-full left-0 mb-2 z-50 w-64 bg-rag-surface2 border border-rag-border rounded-xl p-3 shadow-2xl pointer-events-none">
-          <p className="font-semibold text-rag-text text-sm mb-1">{skill.name}</p>
-          {skill.element && (
-            <p className={`text-xs mb-1 ${ELEMENT_COLOR[skill.element] ?? 'text-rag-muted'}`}>
-              Elemento: {skill.element}
-            </p>
-          )}
-          <p className="text-rag-muted text-xs leading-relaxed mb-2">{skill.description}</p>
-          {skill.requires && skill.requires.length > 0 && (
-            <div className="border-t border-rag-border pt-2">
-              <p className="text-rag-muted text-xs font-semibold mb-1">Requer:</p>
-              {skill.requires.map(req => {
-                const dep = findSkill(req.skillId)
-                const met = (allocated[req.skillId] ?? 0) >= req.level
-                return (
-                  <p key={req.skillId} className={`text-xs ${met ? 'text-rag-green' : 'text-rag-accent'}`}>
-                    {met ? '✓' : '✗'} {dep?.name ?? req.skillId} Lv.{req.level}
-                  </p>
-                )
-              })}
-            </div>
-          )}
-          {missing.length > 0 && (
-            <p className="text-rag-accent text-xs mt-1">
-              ⚡ Auto-aloca: {missing.join(', ')}
-            </p>
-          )}
-          <p className="text-rag-faint text-xs mt-2">
-            Clique: +1 nível · Clique direito: -1 nível
-          </p>
-        </div>
+        <Tooltip skill={skill} allocated={allocated} anchorRef={btnRef} />
       )}
     </div>
   )
