@@ -26,10 +26,13 @@ import { PROFESSOR_SKILLS } from './professor'
 import { SNIPER_SKILLS } from './sniper'
 import { CLOWN_SKILLS } from './clown'
 import { GYPSY_SKILLS } from './gypsy'
+import { WHITESMITH_SKILLS } from './whitesmith'
 import { MINSTREL_SKILLS } from './minstrel'
 import { WANDERER_SKILLS } from './wanderer'
+import { MECHANIC_SKILLS } from './mechanic'
 import { TROUBADOUR_SKILLS } from './troubadour'
 import { TROUVERE_SKILLS } from './trouvere'
+import { MEISTER_SKILLS } from './meister'
 
 export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   // 1ª classe
@@ -62,17 +65,20 @@ export const SKILLS_BY_JOB: Partial<Record<JobId, Skill[]>> = {
   'sniper':       SNIPER_SKILLS,
   'clown':        CLOWN_SKILLS,
   'gypsy':        GYPSY_SKILLS,
-  // TODO: whitesmith, creator, assassin-cross, stalker, high-priest, champion
+  'whitesmith':   WHITESMITH_SKILLS,
+  // TODO: creator, assassin-cross, stalker, high-priest, champion
   // 3rd classes
   'minstrel':     MINSTREL_SKILLS,
   'wanderer':     WANDERER_SKILLS,
-  // TODO: rune-knight, royal-guard, warlock, sorcerer, ranger,
-  //       mechanic, genetic, guillotine-cross, shadow-chaser, archbishop, sura
+  'mechanic':     MECHANIC_SKILLS,
+  // TODO: genetic, guillotine-cross, shadow-chaser, archbishop, sura
+  //       rune-knight, royal-guard, warlock, sorcerer, ranger
   // 4th classes
   'troubadour':   TROUBADOUR_SKILLS,
   'trouvere':     TROUVERE_SKILLS,
-  // TODO: dragon-knight, imperial-guard, arch-mage, elemental-master,
-  //       windhawk, meister, biolo, night-watch, abyss-chaser, cardinal, inquisitor
+  'meister':      MEISTER_SKILLS,
+  // TODO: biolo, night-watch, abyss-chaser, cardinal, inquisitor
+  //       dragon-knight, imperial-guard, arch-mage, elemental-master, windhawk
 }
 
 export function getSkillsForChain(jobChain: JobId[]): { jobId: JobId; skills: Skill[] }[] {
