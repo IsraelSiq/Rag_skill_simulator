@@ -65,14 +65,11 @@ interface TooltipProps {
   allocated: AllocatedSkills
   locked: boolean
   anchorRef: React.RefObject<HTMLButtonElement | null>
-  onAutoAllocate: () => void
 }
 
-function Tooltip({ skill, allocated, locked, anchorRef, onAutoAllocate }: TooltipProps) {
-  const missing   = getMissingDeps(skill, allocated)
+function Tooltip({ skill, allocated, locked, anchorRef }: TooltipProps) {
   const elemStyle = skill.element ? (ELEMENT_COLOR[skill.element] ?? { text: 'text-rag-muted', bg: '' }) : null
   const typeConf  = TYPE_CONFIG[skill.type] ?? TYPE_CONFIG.active
-  const hasMissing = missing.length > 0
 
   const openAbove = (() => {
     if (!anchorRef.current) return true
@@ -85,9 +82,8 @@ function Tooltip({ skill, allocated, locked, anchorRef, onAutoAllocate }: Toolti
       absolute ${ openAbove ? 'bottom-full mb-2' : 'top-full mt-2' }
       left-1/2 -translate-x-1/2
       z-50 w-64 bg-rag-surface2 border border-rag-border rounded-xl p-3.5
-      shadow-2xl
+      shadow-2xl pointer-events-none
       animate-in fade-in-0 zoom-in-95 duration-100
-      ${ hasMissing ? 'pointer-events-auto' : 'pointer-events-none' }
     `}>
       <div className="flex items-center justify-between gap-2 mb-2">
         <p className="font-semibold text-rag-text text-sm leading-tight">{skill.name}</p>
@@ -124,19 +120,6 @@ function Tooltip({ skill, allocated, locked, anchorRef, onAutoAllocate }: Toolti
         </div>
       )}
 
-      {hasMissing && (
-        <button
-          onClick={(e) => { e.stopPropagation(); onAutoAllocate() }}
-          className="w-full mt-1 mb-2 flex items-center justify-center gap-1.5
-                     text-xs font-semibold px-3 py-1.5 rounded-lg
-                     bg-rag-accent/15 border border-rag-accent/40 text-rag-accent
-                     hover:bg-rag-accent/25 hover:border-rag-accent/60
-                     transition-all duration-150 cursor-pointer"
-        >
-          ⚡ Alocar dependências
-        </button>
-      )}
-
       <p className="text-rag-faint text-xs border-t border-rag-border/40 pt-2 mt-1">
         {locked ? '🔒 Habilidade bloqueada — veja os requisitos acima' : 'Clique: +1 · Clique direito: −1'}
       </p>
@@ -163,19 +146,19 @@ export function SkillCard({ skill, currentLevel, allocated, onSetLevel }: Props)
   const isMaxed  = currentLevel >= skill.maxLevel
   const hasLevel = currentLevel > 0
   const locked   = !unlocked && !hasLevel
+  const missing  = getMissingDeps(skill, allocated)
+  const hasMissing = missing.length > 0
 
   function triggerBlocked() {
     setBlocked(true)
     setTimeout(() => setBlocked(false), 600)
   }
 
-  function handleAutoAllocate() {
-    const missing = getMissingDeps(skill, allocated)
+  function handleAutoAllocate(e: React.MouseEvent) {
+    e.stopPropagation()
     missing.forEach(dep => {
       const current = allocated[dep.skillId] ?? 0
-      if (current < dep.level) {
-        onSetLevel(dep.skillId, dep.level)
-      }
+      if (current < dep.level) onSetLevel(dep.skillId, dep.level)
     })
   }
 
@@ -216,13 +199,15 @@ export function SkillCard({ skill, currentLevel, allocated, onSetLevel }: Props)
   const elemStyle = skill.element ? (ELEMENT_COLOR[skill.element] ?? null) : null
 
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+    >
       <button
         ref={btnRef}
         onClick={handleClick}
         onContextMenu={handleRightClick}
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
         onFocus={() => setShowTooltip(true)}
         onBlur={() => setShowTooltip(false)}
         aria-label={`${skill.name} — nível ${currentLevel} de ${skill.maxLevel}`}
@@ -240,9 +225,22 @@ export function SkillCard({ skill, currentLevel, allocated, onSetLevel }: Props)
           }`}>
             {skill.name}
           </span>
-          <span className="text-xs shrink-0 leading-none opacity-70">
-            {TYPE_CONFIG[skill.type]?.icon ?? '⚡'}
-          </span>
+          <div className="flex items-center gap-1 shrink-0">
+            {hasMissing && (
+              <button
+                onClick={handleAutoAllocate}
+                title="Alocar dependências"
+                className="text-xs leading-none text-rag-accent hover:text-rag-accent/70
+                           bg-rag-accent/10 hover:bg-rag-accent/20 rounded px-1 py-px
+                           transition-all duration-150 cursor-pointer"
+              >
+                ⚡
+              </button>
+            )}
+            <span className="text-xs leading-none opacity-70">
+              {TYPE_CONFIG[skill.type]?.icon ?? '⚡'}
+            </span>
+          </div>
         </div>
 
         {elemStyle && skill.element && (
@@ -271,7 +269,6 @@ export function SkillCard({ skill, currentLevel, allocated, onSetLevel }: Props)
           allocated={allocated}
           locked={locked}
           anchorRef={btnRef}
-          onAutoAllocate={handleAutoAllocate}
         />
       )}
     </div>
