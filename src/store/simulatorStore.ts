@@ -17,7 +17,8 @@ interface SimulatorState {
   totalPoints: number
 
   selectJob: (jobId: JobId, chain: JobId[], meta: Record<string, JobMeta>) => void
-  setSkillLevel: (skillId: string, level: number) => void
+  // retorna true se alocou, false se foi bloqueado por falta de SP
+  setSkillLevel: (skillId: string, level: number) => boolean
   resetBuild: () => void
 }
 
@@ -43,12 +44,25 @@ export const useSimulatorStore = create<SimulatorState>((set, get) => ({
   },
 
   setSkillLevel: (skillId, level) => {
-    const { allocated } = get()
-    const newAllocated =
-      level === 0
-        ? (() => { const a = { ...allocated }; delete a[skillId]; return a })()
-        : { ...allocated, [skillId]: level }
+    const { allocated, usedPoints, totalPoints } = get()
+
+    // decrementar ou zerar: sempre permitido
+    if (level <= (allocated[skillId] ?? 0)) {
+      const newAllocated =
+        level === 0
+          ? (() => { const a = { ...allocated }; delete a[skillId]; return a })()
+          : { ...allocated, [skillId]: level }
+      set({ allocated: newAllocated, usedPoints: calcUsed(newAllocated) })
+      return true
+    }
+
+    // incrementar: verificar se cabe
+    const increment = level - (allocated[skillId] ?? 0)
+    if (usedPoints + increment > totalPoints) return false
+
+    const newAllocated = { ...allocated, [skillId]: level }
     set({ allocated: newAllocated, usedPoints: calcUsed(newAllocated) })
+    return true
   },
 
   resetBuild: () => set({ allocated: {}, usedPoints: 0 }),
