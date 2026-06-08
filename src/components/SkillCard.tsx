@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import type { Skill, AllocatedSkills } from '@/types'
 
-// ─── helpers ─────────────────────────────────────────────────────────────────
+// ─── helpers ──────────────────────────────────────────────────────────────────────────
 
 const ELEMENT_COLOR: Record<string, { text: string; bg: string }> = {
   'Fogo':       { text: 'text-red-400',    bg: 'bg-red-400/10'     },
@@ -35,7 +35,7 @@ function getMissingDeps(skill: Skill, allocated: AllocatedSkills) {
     .map(req => ({ skillId: req.skillId, level: req.level }))
 }
 
-// ─── barra de nível ───────────────────────────────────────────────────────────
+// ─── barra de nível ───────────────────────────────────────────────────────────────
 
 function LevelBar({ current, max, isMaxed }: { current: number; max: number; isMaxed: boolean }) {
   if (max >= 7) {
@@ -58,15 +58,16 @@ function LevelBar({ current, max, isMaxed }: { current: number; max: number; isM
   )
 }
 
-// ─── tooltip ──────────────────────────────────────────────────────────────────
+// ─── tooltip ────────────────────────────────────────────────────────────────────────
 
 interface TooltipProps {
   skill: Skill
   allocated: AllocatedSkills
+  locked: boolean
   anchorRef: React.RefObject<HTMLButtonElement | null>
 }
 
-function Tooltip({ skill, allocated, anchorRef }: TooltipProps) {
+function Tooltip({ skill, allocated, locked, anchorRef }: TooltipProps) {
   const missing  = getMissingDeps(skill, allocated)
   const elemStyle = skill.element ? (ELEMENT_COLOR[skill.element] ?? { text: 'text-rag-muted', bg: '' }) : null
   const typeConf  = TYPE_CONFIG[skill.type] ?? TYPE_CONFIG.active
@@ -127,19 +128,18 @@ function Tooltip({ skill, allocated, anchorRef }: TooltipProps) {
       )}
 
       <p className="text-rag-faint text-xs border-t border-rag-border/40 pt-2 mt-1">
-        Clique: +1 · Clique direito: −1
+        {locked ? '🔒 Habilidade bloqueada — veja os requisitos acima' : 'Clique: +1 · Clique direito: −1'}
       </p>
     </div>
   )
 }
 
-// ─── card principal ───────────────────────────────────────────────────────────
+// ─── card principal ───────────────────────────────────────────────────────────────────
 
 interface Props {
   skill: Skill
   currentLevel: number
   allocated: AllocatedSkills
-  // retorna true se alocou, false se bloqueado por SP insuficiente
   onSetLevel: (skillId: string, level: number) => boolean
 }
 
@@ -160,6 +160,7 @@ export function SkillCard({ skill, currentLevel, allocated, onSetLevel }: Props)
   }
 
   function handleClick() {
+    if (locked) return
     if (isMaxed) {
       onSetLevel(skill.id, 0)
     } else {
@@ -174,6 +175,7 @@ export function SkillCard({ skill, currentLevel, allocated, onSetLevel }: Props)
 
   function handleRightClick(e: React.MouseEvent) {
     e.preventDefault()
+    if (locked) return
     if (currentLevel > 0) {
       onSetLevel(skill.id, currentLevel - 1)
       setPressed(true)
@@ -203,7 +205,6 @@ export function SkillCard({ skill, currentLevel, allocated, onSetLevel }: Props)
         onMouseLeave={() => setShowTooltip(false)}
         onFocus={() => setShowTooltip(true)}
         onBlur={() => setShowTooltip(false)}
-        disabled={locked}
         aria-label={`${skill.name} — nível ${currentLevel} de ${skill.maxLevel}`}
         className={`
           w-full flex flex-col gap-1.5 p-3 rounded-xl border text-left
@@ -245,7 +246,7 @@ export function SkillCard({ skill, currentLevel, allocated, onSetLevel }: Props)
       </button>
 
       {showTooltip && (
-        <Tooltip skill={skill} allocated={allocated} anchorRef={btnRef} />
+        <Tooltip skill={skill} allocated={allocated} locked={locked} anchorRef={btnRef} />
       )}
     </div>
   )
