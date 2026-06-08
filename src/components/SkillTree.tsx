@@ -5,7 +5,7 @@ import type { JobId, AllocatedSkills, Skill } from '@/types'
 interface Props {
   jobChain: JobId[]
   allocated: AllocatedSkills
-  onSetLevel: (skillId: string, level: number) => void
+  onSetLevel: (skillId: string, level: number) => boolean
   jobMeta?: Record<string, { name: string; icon?: string }>
 }
 
@@ -41,7 +41,7 @@ function JobSection({
 }: {
   jobId: JobId
   allocated: AllocatedSkills
-  onSetLevel: (skillId: string, level: number) => void
+  onSetLevel: (skillId: string, level: number) => boolean
   jobMeta?: Record<string, { name: string; icon?: string }>
 }) {
   const { data: skills, loading, error } = useSkills(jobId)
