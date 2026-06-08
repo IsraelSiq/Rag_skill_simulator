@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import type { Job, Skill, JobId } from '@/types'
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? 'https://rag-api-ochre.vercel.app'
